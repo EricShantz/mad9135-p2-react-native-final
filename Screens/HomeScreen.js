@@ -5,49 +5,62 @@ import {SafeAreaView} from 'react-native';
 import { StatusBar } from 'expo-status-bar'
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { TextInput } from 'react-native';
-let isHidden = "none"
+import { TextInput, Modal, Button } from 'react-native';
+import { useContext } from 'react';
 
 export default function HomeScreen(){
   const [players, setPlayers] = useState([])
   const [player, setPlayer]= useState({})
   const [chosenAvatar, setChosenAvatar] = useState()
+  const [showModal, setShowModal] = useState(false)
 
   let avatars = [{image: require("../assets/avatars/Bear.png")}, {image:require("../assets/avatars/Beaver.png")},{image: require("../assets/avatars/Corgi.png")},{image: require("../assets/avatars/Duck.png")},{image: require("../assets/avatars/Elephant.png")},{image: require("../assets/avatars/Gorilla.png")},{image: require("../assets/avatars/Prawn.png")},{image: require("../assets/avatars/Snail.png")},{image: require("../assets/avatars/Stork.png")},{image: require("../assets/avatars/Turtle.png")},{image: require("../assets/avatars/Unicorn.png")},{image: require("../assets/avatars/Whale.png")}]
 
   function addPlayer(){
     setPlayers([...players, player])
-    isHidden = "none"
-    console.log("CCLICKED")
+    
   }
 
   return (
     <SafeAreaView edges={['left', 'right']} style={styles.container}>  
     <Text style={styles.listTitle}>List of Players</Text>
-    <FlatList data={players} renderItem={(item)=> <Player players={item} />}>
+    <FlatList horizontal={true} data={players} renderItem={(item)=> <Player players={item}/>}>
     </FlatList>
 
-    <View style={{display: isHidden}}>
-    <Text style={styles.title}>Enter Player Names</Text>
-      <View style={styles.playerInput}>
-        <TextInput placeholder="New Player" onChangeText={(text) => {setPlayer({name: text, id: text+Date.now(), avatar: chosenAvatar})}}/>
-      </View>
-      <Pressable style={styles.addBtn} onPress={()=>{addPlayer()}}>
-      <Text style={styles.addBtnText}>Add Player</Text>
-    </Pressable>
-    </View>
 
-    <View style={{marginTop: 20}}>
+{/* POPUP */}
+    <Modal animationType="slide" transparent={false} visible={showModal}>
+      <Text style={styles.title}>Enter Player Names</Text>
+      <View style={styles.playerInput}>
+        <TextInput placeholder="New Player" onChangeText={(text) => {setPlayer({name: text, id: Math.random()*1000, avatar: chosenAvatar})}}/>
+      </View>
+      <Pressable style={styles.addBtn} onPress={()=>{addPlayer(); setShowModal(false); setPlayer({})}}>
+        <Text style={styles.addBtnText}>Add Player</Text>
+      </Pressable>
+    </Modal>
+{/* POPUP END */}
+
+    <View style={{marginTop: 15, marginBottom:30}}>
       <Text> Choose your character!</Text>
       <View style={styles.avatarList}>
       {avatars.map((item)=>{
         return(
-          <Pressable onPress={()=>{setChosenAvatar(item); buildNameModal()}} key={item+Date.now()+Math.random()* 21}>
+          <Pressable onPress={()=>{setChosenAvatar(item); setShowModal(true)}} key={item+Date.now()+Math.random()* 21}>
             <Image source={item.image} style={{width: 90, height: 90}}/>
           </Pressable>)
       })}
       </View>
     </View>
+
+      {players.length <2 &&
+      <Button title={"Start Playing!"} disabled={true} >
+      </Button>
+      }
+      {players.length >= 2 &&
+      <Button title={"Start Playing!"} onPress={()=>{}}>
+      </Button>
+      }
+
       <StatusBar style="auto"/>
     </SafeAreaView>
   )
@@ -56,27 +69,30 @@ export default function HomeScreen(){
 function Player({players}){
   return(
     <View style={styles.playerContainer}>
+      <View style={styles.delBtn}>
+        <Text onPress={deletePlayer()}>x</Text>
+      </View>
+      <Image source = {players.item.avatar.image} style={{width:50, height:50}}/>
       <Text style={styles.playerItem}>{players.item.name}</Text>
     </View>
   )
 }
 
-function buildNameModal(){
-  isHidden = "flex"
-    return(
-      <View>
-      <Text style={styles.title}>Enter Player Names</Text>
-      <View style={styles.playerInput}>
-        <TextInput placeholder="New Player" onChangeText={(text) => {setPlayer({name: text, id: text+1, avatar: chosenAvatar})}}/>
-      </View>
-      <Pressable style={styles.addBtn} onPress={()=>{addPlayer()}}>
-      <Text style={styles.addBtnText}>Add Player</Text>
-    </Pressable> 
-    </View>
-    )
+function deletePlayer(){
+  console.log("DELETE")
+  //TODO: add player list to context so we can delete an item
 }
 
 const styles = StyleSheet.create({
+  delBtn:{
+    borderWidth:1,
+    width:15,
+    height:15,
+    textAlignVertical:'center',
+    textAlign:'center',
+    borderColor:"grey",
+    borderRadius:20
+  },
   container: {
   flexDirection: 'column',
   justifyContent: 'center',
@@ -95,7 +111,8 @@ const styles = StyleSheet.create({
   },
   addBtnText:{
     fontSize:15,
-    padding: 5
+    padding: 5,
+    textAlign:'center'
   },
   title:{
     fontSize:25,
@@ -112,10 +129,14 @@ const styles = StyleSheet.create({
     width:"85%"
   },
   playerContainer:{
-    //make it look nice
+    display:'flex',
+    flexDirection:'column',
+    marginHorizontal:15,
+    marginVertical:20
+
   },
   playerItem:{
-    //make it look nice
+    textAlign: 'center',
   },
 
 })
