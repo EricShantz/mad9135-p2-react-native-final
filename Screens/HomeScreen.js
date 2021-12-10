@@ -6,7 +6,7 @@ import {
   Pressable,
   ActivityIndicatorBase,
 } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { FlatList } from 'react-native-gesture-handler';
@@ -40,6 +40,14 @@ export default function HomeScreen() {
     setPlayers([...players, player]);
   }
 
+  const showAlert = () =>
+    Alert.alert('Alert', 'Cannot leave input field empty', [
+      {
+        text: 'Dismiss',
+        style: 'ok',
+      },
+    ]);
+
   return (
     <SafeAreaView edges={['left', 'right']} style={theme.container}>
       <Text style={theme.listTitle}>List of Players</Text>
@@ -67,17 +75,14 @@ export default function HomeScreen() {
         <Pressable
           style={theme.addBtn}
           onPress={() => {
-            
-            if(player.name == undefined){
-              return
-            }else{
-            setPlayers([...players, player]);
-            
-            
-            addPlayer();
-            setShowModal(false);
-            setPlayer({});
-          }
+            if (player.name == undefined) {
+              return showAlert();
+            } else {
+              setPlayers([...players, player]);
+              addPlayer();
+              setShowModal(false);
+              setPlayer({});
+            }
           }}
         >
           <Text style={theme.addBtnText}>Add Player</Text>
@@ -134,6 +139,4 @@ function Player({ players }) {
 function deletePlayer() {
   console.log('DELETE');
   //TODO: add player list to context so we can delete an item
-
 }
-
