@@ -64,7 +64,17 @@ export default function HomeScreen() {
 
       {/* POPUP */}
       <Modal animationType="slide" transparent={false} visible={showModal}>
-        <Text style={theme.title}>Enter Player Names</Text>
+
+      <View style={{ flexDirection: 'row' }}>
+          <Text style={theme.title}>Enter Player Name</Text>
+          <Button
+            title={'X'}
+            onPress={() => {
+              setShowModal(false);
+            }}
+          ></Button>
+        </View>  
+
         <View style={theme.playerInput}>
           <TextInput
             placeholder="New Player"
