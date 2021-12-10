@@ -15,8 +15,13 @@ import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
 
+let globalPlayers;
+let globalSetPlayers;
+
 export default function HomeScreen() {
   const { players, setPlayers } = usePlayersContext();
+  globalPlayers = players
+  globalSetPlayers = setPlayers
   const [player, setPlayer] = useState({});
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -54,7 +59,7 @@ export default function HomeScreen() {
       <FlatList
         horizontal={true}
         data={players}
-        renderItem={(item) => <Player players={item} />}
+        renderItem={(item) => <Player players={item} setPlayers={setPlayers} />}
       ></FlatList>
 
       {/* POPUP */}
@@ -75,14 +80,16 @@ export default function HomeScreen() {
         <Pressable
           style={theme.addBtn}
           onPress={() => {
-            if (player.name == undefined) {
-              return showAlert();
-            } else {
-              setPlayers([...players, player]);
-              addPlayer();
-              setShowModal(false);
-              setPlayer({});
-            }
+            
+            if(player.name == undefined){
+              return
+            }else{
+            setPlayers([...players, player]);
+            addPlayer();
+            setShowModal(false);
+            setPlayer({});
+          }
+
           }}
         >
           <Text style={theme.addBtnText}>Add Player</Text>
@@ -121,12 +128,11 @@ export default function HomeScreen() {
   );
 }
 
-function Player({ players }) {
+function Player({ players, setPlayers }) {
+  let id = players.item.id
   return (
     <View style={theme.playerContainer}>
-      <View style={theme.delBtn}>
-        <Text onPress={deletePlayer()}>x</Text>
-      </View>
+        <Button onPress={()=>{deletePlayer(id, players, setPlayers)}} title="X"></Button>
       <Image
         source={players.item.avatar.image}
         style={{ width: 50, height: 50 }}
@@ -136,7 +142,7 @@ function Player({ players }) {
   );
 }
 
-function deletePlayer() {
-  console.log('DELETE');
-  //TODO: add player list to context so we can delete an item
+
+function deletePlayer(id) {
+  globalSetPlayers(globalPlayers.filter((player) => player.id !== id))
 }

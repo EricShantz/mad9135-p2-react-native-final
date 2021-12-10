@@ -1,15 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const theme = StyleSheet.create({
-  delBtn: {
-    borderWidth: 1,
-    width: 15,
-    height: 15,
-    textAlignVertical: 'center',
-    textAlign: 'center',
-    borderColor: 'grey',
-    borderRadius: 20,
-  },
+
   container: {
     flexDirection: 'column',
     justifyContent: 'center',
