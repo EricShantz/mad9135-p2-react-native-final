@@ -20,8 +20,8 @@ let globalSetPlayers;
 
 export default function HomeScreen() {
   const { players, setPlayers } = usePlayersContext();
-  globalPlayers = players
-  globalSetPlayers = setPlayers
+  globalPlayers = players;
+  globalSetPlayers = setPlayers;
   const [player, setPlayer] = useState({});
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -64,8 +64,7 @@ export default function HomeScreen() {
 
       {/* POPUP */}
       <Modal animationType="slide" transparent={false} visible={showModal}>
-
-      <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row' }}>
           <Text style={theme.title}>Enter Player Name</Text>
           <Button
             title={'X'}
@@ -73,7 +72,7 @@ export default function HomeScreen() {
               setShowModal(false);
             }}
           ></Button>
-        </View>  
+        </View>
 
         <View style={theme.playerInput}>
           <TextInput
@@ -90,16 +89,14 @@ export default function HomeScreen() {
         <Pressable
           style={theme.addBtn}
           onPress={() => {
-            
-            if(player.name == undefined){
-              return
-            }else{
-            setPlayers([...players, player]);
-            addPlayer();
-            setShowModal(false);
-            setPlayer({});
-          }
-
+            if (player.name == undefined) {
+              return showAlert();
+            } else {
+              setPlayers([...players, player]);
+              addPlayer();
+              setShowModal(false);
+              setPlayer({});
+            }
           }}
         >
           <Text style={theme.addBtnText}>Add Player</Text>
@@ -139,10 +136,15 @@ export default function HomeScreen() {
 }
 
 function Player({ players, setPlayers }) {
-  let id = players.item.id
+  let id = players.item.id;
   return (
     <View style={theme.playerContainer}>
-        <Button onPress={()=>{deletePlayer(id, players, setPlayers)}} title="X"></Button>
+      <Button
+        onPress={() => {
+          deletePlayer(id, players, setPlayers);
+        }}
+        title="X"
+      ></Button>
       <Image
         source={players.item.avatar.image}
         style={{ width: 50, height: 50 }}
@@ -152,7 +154,6 @@ function Player({ players, setPlayers }) {
   );
 }
 
-
 function deletePlayer(id) {
-  globalSetPlayers(globalPlayers.filter((player) => player.id !== id))
+  globalSetPlayers(globalPlayers.filter((player) => player.id !== id));
 }
