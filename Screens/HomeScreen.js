@@ -67,9 +67,17 @@ export default function HomeScreen() {
         <Pressable
           style={theme.addBtn}
           onPress={() => {
+            
+            if(player.name == undefined){
+              return
+            }else{
+            setPlayers([...players, player]);
+            
+            
             addPlayer();
             setShowModal(false);
             setPlayer({});
+          }
           }}
         >
           <Text style={theme.addBtnText}>Add Player</Text>
@@ -126,14 +134,6 @@ function Player({ players }) {
 function deletePlayer() {
   console.log('DELETE');
   //TODO: add player list to context so we can delete an item
+
 }
 
-{
-  /* <Text style={theme.title}>Enter Player Names</Text>
-      <View style={theme.playerInput}>
-        <TextInput placeholder="New Player" onChangeText={(text) => {setPlayer({name: text, id: text+1, avatar: chosenAvatar})}}/>
-      </View>
-      <Pressable style={theme.addBtn} onPress={()=>{addPlayer()}}>
-      <Text style={theme.addBtnText}>Add Player</Text>
-    </Pressable>  */
-}
