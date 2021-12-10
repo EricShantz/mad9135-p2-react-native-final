@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   Image,
@@ -12,11 +12,11 @@ import { StatusBar } from 'expo-status-bar';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput, Modal, Button } from 'react-native';
-import { useContext } from 'react';
 import { theme } from '../theme';
+import { usePlayersContext } from '../Context/AppContext';
 
 export default function HomeScreen() {
-  const [players, setPlayers] = useState([]);
+  const { players, setPlayers } = usePlayersContext();
   const [player, setPlayer] = useState({});
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
