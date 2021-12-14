@@ -67,7 +67,16 @@ const theme = StyleSheet.create({
 
   nextGameBtn:{
     marginTop: 50,
-  }
+  },
+
+  flipCard:{
+    fontSize:16
+  },
+  flipCardFront:{
+    backgroundColor: 'red'
+  },
+  flipCardBack:{
+  backgroundColor:'blue'  }
 });
 
 export { theme };
