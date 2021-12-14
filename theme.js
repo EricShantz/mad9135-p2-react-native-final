@@ -1,7 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 const theme = StyleSheet.create({
-
+  backgroundStyling: {
+    backgroundColor: '#15002E',
+  },
+  avatarContainer: {
+    borderRadius: 10,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    margin: 9,
+    borderRadius: 10,
+  },
   container: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -11,6 +21,7 @@ const theme = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    // justifyContent: 'center',
   },
   addBtn: {
     zIndex: 1,
@@ -42,9 +53,21 @@ const theme = StyleSheet.create({
     flexDirection: 'column',
     marginHorizontal: 15,
     marginVertical: 20,
+    borderWidth: 1,
+    borderRadius: 50,
+    borderColor: '#fff',
   },
   playerItem: {
     textAlign: 'center',
+  },
+
+  playersListContainer: {
+    marginTop: 20,
+    borderRadius: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    width: '90%',
+    height: '25%',
+    alignSelf: 'center',
   },
 
   gameCard:{
@@ -77,6 +100,7 @@ const theme = StyleSheet.create({
   },
   flipCardBack:{
   backgroundColor:'blue'  }
+
 });
 
 export { theme };
