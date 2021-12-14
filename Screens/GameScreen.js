@@ -17,13 +17,15 @@ import { useState, useEffect } from 'react';
 
 export default function GameScreen() {
   const { players, setPlayers } = usePlayersContext();
+  const [showSpin, setShowSpin] = useState(true)
   console.log(players);
   return (
     <SafeAreaView edges={['left', 'right']}>
       <Text>You've reached the Game Screen</Text>
 
-      <ShuffleScreen/>
-
+      {showSpin &&
+      <ShuffleScreen />
+      }
 
       <StatusBar style="auto" />
     </SafeAreaView>
