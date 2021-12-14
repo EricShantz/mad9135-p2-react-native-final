@@ -46,6 +46,37 @@ const theme = StyleSheet.create({
   playerItem: {
     textAlign: 'center',
   },
+
+  gameCard:{
+    marginTop: 100,
+    height: 300,
+    width: 200,
+    borderColor: 'black',
+    borderWidth:2,
+    marginHorizontal: 5,
+    borderRadius: 20,
+    textAlign: 'center'
+  },
+
+  cardText:{
+    textAlign: 'center',
+    marginTop:50,
+    fontSize:25,
+    paddingHorizontal: 10
+  },
+
+  nextGameBtn:{
+    marginTop: 50,
+  },
+
+  flipCard:{
+    fontSize:16
+  },
+  flipCardFront:{
+    backgroundColor: 'red'
+  },
+  flipCardBack:{
+  backgroundColor:'blue'  }
 });
 
 export { theme };

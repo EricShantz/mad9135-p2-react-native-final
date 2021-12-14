@@ -50,7 +50,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Games"
+            name="GameScreen"
             component={GameScreen}
             options={{
               headerStyle: {
