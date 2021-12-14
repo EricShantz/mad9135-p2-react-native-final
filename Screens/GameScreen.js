@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Text,
+  Button,
   Image,
   ActivityIndicator,
   ImageBackground,
@@ -12,6 +13,7 @@ import { StatusBar } from 'expo-status-bar';
 import ShuffleScreen from '../Components/Shuffle';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
+import { useState, useEffect } from 'react';
 
 export default function GameScreen() {
   const { players, setPlayers } = usePlayersContext();
@@ -19,7 +21,10 @@ export default function GameScreen() {
   return (
     <SafeAreaView edges={['left', 'right']}>
       <Text>You've reached the Game Screen</Text>
-      <ShuffleScreen />
+
+      <ShuffleScreen/>
+
+
       <StatusBar style="auto" />
     </SafeAreaView>
   );

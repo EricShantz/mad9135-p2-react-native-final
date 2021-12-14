@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  Pressable,
-  ActivityIndicatorBase,
-} from 'react-native';
+import {Text, Image, View, Pressable, ActivityIndicatorBase} from 'react-native';
 import { StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -14,11 +8,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import {GameScreen} from './GameScreen'
 
 let globalPlayers;
 let globalSetPlayers;
+const AppStack = createStackNavigator();
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   const { players, setPlayers } = usePlayersContext();
   globalPlayers = players;
   globalSetPlayers = setPlayers;
@@ -127,7 +125,7 @@ export default function HomeScreen() {
         <Button title={'Start Playing!'} disabled={true}></Button>
       )}
       {players.length >= 2 && (
-        <Button title={'Start Playing!'} onPress={() => {}}></Button>
+        <Button title={'Start Playing!'} onPress={() => {navigation.navigate("GameScreen")}}></Button>
       )}
 
       <StatusBar style="auto" />
