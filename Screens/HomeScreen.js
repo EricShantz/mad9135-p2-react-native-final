@@ -117,7 +117,7 @@ export default function HomeScreen({navigation}) {
           <Button title={'Start Playing!'} disabled={true}></Button>
         )}
         {players.length >= 2 && (
-          <Button title={'Start Playing!'} onPress={() => {}}></Button>
+          <Button title={'Start Playing!'} onPress={() => {navigation.navigate("Games")}}></Button>
         )}
       </View>
 
