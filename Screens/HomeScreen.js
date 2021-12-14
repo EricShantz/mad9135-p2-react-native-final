@@ -6,14 +6,14 @@ import {
   Pressable,
   ActivityIndicatorBase,
 } from 'react-native';
-import { StyleSheet, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Alert, TouchableHighlight } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { FlatList } from 'react-native-gesture-handler';
+import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
+import { useFonts } from 'expo-font';
 
 let globalPlayers;
 let globalSetPlayers;
@@ -54,12 +54,21 @@ export default function HomeScreen() {
     ]);
 
   return (
-    <SafeAreaView edges={['left', 'right']} style={theme.container}>
-      <Text style={theme.listTitle}>List of Players</Text>
+    <SafeAreaView
+      edges={['left', 'right']}
+      style={(theme.container, theme.backgroundStyling)}
+    >
+      {/* <Text style={theme.listTitle}>List of Players</Text> */}
+
       <FlatList
         horizontal={true}
         data={players}
         renderItem={(item) => <Player players={item} setPlayers={setPlayers} />}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+        style={theme.playersListContainer}
+        ListHeaderComponent={
+          players.length === 0 && <Text>Your chosen players will go here</Text>
+        }
       ></FlatList>
 
       {/* POPUP */}
@@ -104,31 +113,60 @@ export default function HomeScreen() {
       </Modal>
       {/* POPUP END */}
 
-      <View style={{ marginTop: 15, marginBottom: 30 }}>
-        <Text> Choose your character!</Text>
-        <View style={theme.avatarList}>
-          {avatars.map((item) => {
-            return (
-              <Pressable
-                onPress={() => {
-                  setChosenAvatar(item);
-                  setShowModal(true);
-                }}
-                key={item + Date.now() + Math.random() * 21}
-              >
-                <Image source={item.image} style={{ width: 90, height: 90 }} />
-              </Pressable>
-            );
-          })}
-        </View>
+      <View>
+        {players.length < 2 && (
+          <Button title={'Start Playing!'} disabled={true}></Button>
+        )}
+        {players.length >= 2 && (
+          <Button title={'Start Playing!'} onPress={() => {}}></Button>
+        )}
       </View>
 
-      {players.length < 2 && (
-        <Button title={'Start Playing!'} disabled={true}></Button>
-      )}
-      {players.length >= 2 && (
-        <Button title={'Start Playing!'} onPress={() => {}}></Button>
-      )}
+      <View style={{ marginTop: 15, marginBottom: 30 }}>
+        <Text
+          style={{
+            fontFamily: 'Bakbak',
+            textAlign: 'center',
+            color: 'white',
+            fontSize: 20,
+          }}
+        >
+          Choose your players!
+        </Text>
+
+        {/* AVATARS LIST */}
+        <View style={theme.avatarListContainer}>
+          <ScrollView
+            style={theme.avatarList}
+            contentContainerStyle={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            contentInset={{ bottom: 160 }}
+          >
+            <View style={theme.avatarList}>
+              {avatars.map((item) => {
+                return (
+                  <Pressable
+                    onPress={() => {
+                      setChosenAvatar(item);
+                      setShowModal(true);
+                    }}
+                    key={item + Date.now() + Math.random() * 21}
+                    style={theme.avatarContainer}
+                  >
+                    <Image
+                      source={item.image}
+                      style={{ width: 90, height: 90 }}
+                    />
+                  </Pressable>
+                );
+              })}
+            </View>
+          </ScrollView>
+        </View>
+      </View>
 
       <StatusBar style="auto" />
     </SafeAreaView>
