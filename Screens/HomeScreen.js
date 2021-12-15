@@ -134,9 +134,10 @@ export default function HomeScreen({navigation}) {
       </View>
       <View style={theme.container}>
         {players.length >= 2 && (
+
           <Pressable style={theme.button} onPress={() => {}}>
             <Text style={theme.text}>{'Start Playing!'}</Text>
-          </Pressable>
+          </Pressable> 
         )}
       </View>
 
