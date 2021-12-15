@@ -5,7 +5,9 @@ import { StyleSheet} from 'react-native';
 export default function ShuffleScreen() {
   return (
     <View>
-      <Text>You've reached the Shuffle Screen</Text>
+      <Text>To start, shake your phone! this will generate a random player.</Text>
+      <Text>Whoever's name shows up on screen will be the first person to choose a game</Text>
+      <Text>Click next when you're done!</Text>
     </View>
   )
 }
