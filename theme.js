@@ -2,15 +2,21 @@ import { StyleSheet } from 'react-native';
 
 const theme = StyleSheet.create({
   backgroundStyling: {
-    backgroundColor: '#15002E',
+    backgroundColor: '#30d5c8',
+  },
+  tab: {
+    backgroundColor: '#30d5c8',
   },
   avatarContainer: {
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     borderStyle: 'solid',
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
     margin: 9,
     borderRadius: 10,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   container: {
     flexDirection: 'column',
@@ -22,6 +28,7 @@ const theme = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     // justifyContent: 'center',
+    alignSelf: 'center',
   },
   addBtn: {
     zIndex: 1,
@@ -64,10 +71,28 @@ const theme = StyleSheet.create({
   playersListContainer: {
     marginTop: 20,
     borderRadius: 15,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
     width: '90%',
     height: '25%',
     alignSelf: 'center',
+    textAlign: 'center',
+  },
+
+  button: {
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: '#6700D0',
+    borderRadius: 10,
+    flexWrap: 'wrap',
+    margin: 15,
+    alignSelf: 'center',
+  },
+  text: {
+    fontFamily: 'Bakbak',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25,
   },
 
   gameCard:{

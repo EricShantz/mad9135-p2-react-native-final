@@ -42,20 +42,20 @@ export default function App() {
             component={HomeScreen}
             options={{
               headerStyle: {
-                backgroundColor: '#15002E',
+                backgroundColor: '#30d5c8',
               },
               headerTitleStyle: {
-                color: 'white',
+                color: 'black',
                 fontSize: 25,
               },
-              tabBarActiveBackgroundColor: '#610000',
-              tabBarInactiveBackgroundColor: '#BE0000',
+              tabBarActiveBackgroundColor: '#fff',
+              // tabBarInactiveBackgroundColor: '#',
               tabBarLabelStyle: {
-                color: 'white',
+                color: 'black',
                 fontSize: 14,
               },
               tabBarStyle: {
-                borderTopColor: '#BE0000',
+                borderTopColor: '#C6EB27',
               },
             }}
           />
@@ -68,13 +68,13 @@ export default function App() {
                 shadowColor: 'transparent',
               },
               headerTitleStyle: {
-                color: 'white',
+                color: 'black',
                 fontSize: 25,
               },
               tabBarActiveBackgroundColor: '#610000',
               tabBarInactiveBackgroundColor: '#BE0000',
               tabBarLabelStyle: {
-                color: 'white',
+                color: 'black',
                 fontSize: 14,
               },
               tabBarStyle: {
@@ -87,12 +87,3 @@ export default function App() {
     </PlayersProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
