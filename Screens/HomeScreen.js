@@ -64,10 +64,23 @@ export default function HomeScreen() {
         horizontal={true}
         data={players}
         renderItem={(item) => <Player players={item} setPlayers={setPlayers} />}
-        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
         style={theme.playersListContainer}
         ListHeaderComponent={
-          players.length === 0 && <Text>Your chosen players will go here</Text>
+          players.length === 0 && (
+            <Text
+              style={{
+                color: '#008D8D',
+                fontFamily: 'Bakbak',
+              }}
+            >
+              Your chosen players will go here
+            </Text>
+          )
         }
       ></FlatList>
 
@@ -113,12 +126,18 @@ export default function HomeScreen() {
       </Modal>
       {/* POPUP END */}
 
-      <View>
+      <View style={theme.buttonContainer}>
         {players.length < 2 && (
-          <Button title={'Start Playing!'} disabled={true}></Button>
+          <Pressable style={theme.button}>
+            <Text style={theme.text}>{'Start Playing!'}</Text>
+          </Pressable>
         )}
+      </View>
+      <View style={theme.container}>
         {players.length >= 2 && (
-          <Button title={'Start Playing!'} onPress={() => {}}></Button>
+          <Pressable style={theme.button} onPress={() => {}}>
+            <Text style={theme.text}>{'Start Playing!'}</Text>
+          </Pressable>
         )}
       </View>
 
@@ -140,10 +159,8 @@ export default function HomeScreen() {
             style={theme.avatarList}
             contentContainerStyle={{
               flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
             }}
-            contentInset={{ bottom: 160 }}
+            contentInset={{ bottom: 200, left: 0, right: 0 }}
           >
             <View style={theme.avatarList}>
               {avatars.map((item) => {
