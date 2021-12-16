@@ -181,13 +181,7 @@ export default function HomeScreen({ navigation }) {
 
         {/* AVATARS LIST */}
       
-          <ScrollView
-            // style={theme.avatarList}
-            // contentContainerStyle={{
-            //   flex: 1,
-            // }}
-            // contentInset={{ bottom: 200, left: 0, right: 0 }}
-          >
+          <ScrollView style={theme.avatarList} contentContainerStyle={{flex: 1}}>
             <View style={theme.avatarList}>
               {avatars.map((item) => {
                 return (
