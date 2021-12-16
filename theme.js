@@ -26,7 +26,7 @@ const theme = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10
+    marginBottom: 10,
   },
   avatarList: {
     display: 'flex',
@@ -35,7 +35,6 @@ const theme = StyleSheet.create({
     alignSelf: 'center',
     // ==============================Here's the thing thats hiding the top flatlist on the home page
     // marginBottom:500
-
   },
   addBtnText: {
     fontFamily: 'Bakbak',
@@ -55,28 +54,27 @@ const theme = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  modal:{
-    backgroundColor: "#30d5c8"
+  modal: {
+    backgroundColor: '#30d5c8',
   },
   playerInput: {
     width: '85%',
     height: '7%',
     borderRadius: 40,
-    alignSelf:'center',
+    alignSelf: 'center',
     paddingHorizontal: 20,
     backgroundColor: 'white',
   },
-  inputElement:{
+  inputElement: {
     paddingTop: 8,
-    fontSize:25,
+    fontSize: 25,
     textAlignVertical: 'bottom',
   },
-  bigOlIcon:{
+  bigOlIcon: {
     marginTop: 50,
     width: 175,
     height: 175,
-    alignSelf:'center'
-
+    alignSelf: 'center',
   },
   playerContainer: {
     display: 'flex',
@@ -85,23 +83,22 @@ const theme = StyleSheet.create({
     marginVertical: 20,
   },
 
-  playerContainerButton:{
+  playerContainerButton: {
     borderRadius: 80,
-    borderColor: "black",
+    borderColor: 'black',
     borderWidth: 2,
     width: 23,
-    marginLeft:30
+    marginLeft: 30,
   },
 
-  cancelButton:{
+  cancelButton: {
     marginLeft: 75,
-    marginTop: 15
+    marginTop: 15,
   },
 
-  cancelButtonText:{
-    fontSize: 20
+  cancelButtonText: {
+    fontSize: 20,
   },
-
 
   playerItem: {
     textAlign: 'center',
@@ -154,7 +151,7 @@ const theme = StyleSheet.create({
     height: 300,
     width: 200,
     shadowColor: '#410000',
-    shadowOffset: {width: -2, height: 4},
+    shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 4,
@@ -162,14 +159,14 @@ const theme = StyleSheet.create({
     backgroundColor: '#720202',
     borderRadius: 20,
     textAlign: 'center',
-    marginBottom: 8
+    marginBottom: 8,
   },
-  gameCardBack:{
+  gameCardBack: {
     marginTop: 100,
     height: 300,
     width: 200,
     shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
+    shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 5,
@@ -177,7 +174,8 @@ const theme = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 20,
     textAlign: 'center',
-    marginBottom: 8  },
+    marginBottom: 8,
+  },
 
   cardText: {
     textAlign: 'center',
@@ -192,10 +190,6 @@ const theme = StyleSheet.create({
     color: 'black',
     paddingVertical: 20,
     paddingHorizontal: 10,
-  },
-
-  nextGameBtn: {
-    marginTop: 50,
   },
 
   flipCard: {
@@ -217,72 +211,74 @@ const theme = StyleSheet.create({
       { scale: 1.1 },
     ],
   },
-  keyboardContainer:{
-    flex: 1
+  keyboardContainer: {
+    flex: 1,
   },
 
-  gamesInstructions:{
+  gamesInstructions: {
     marginVertical: 50,
-    textAlign:'center',
-    paddingHorizontal: 15
+    textAlign: 'center',
+    paddingHorizontal: 15,
   },
 
-  playerSpinner:{
+  playerSpinner: {
     // height: 200,
   },
 
-  playerSpinnerImage:{
+  playerSpinnerImage: {
     width: 100,
     height: 100,
     marginVertical: 8,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
-  playerSpinnerImageDefault:{
+  playerSpinnerImageDefault: {
     width: 65,
     height: 56,
     marginVertical: 8,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
-  textAlign:{
-    textAlign:'center',
-    fontSize: 20
+  textAlign: {
+    textAlign: 'center',
+    fontSize: 20,
   },
-  nextGameBtnShuffle:{
-    justifyContent:'center',
-    alignContent:'center',
-    alignItems:'center',
-    alignSelf:'center',
+  nextGameBtnShuffle: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
     marginLeft: 80,
     marginBottom: 500,
-    backgroundColor:'white',
+    backgroundColor: 'white',
     width: 500,
-    paddingBottom: 500
+    paddingBottom: 500,
   },
-  nextGameBtn:{
-    justifyContent:'center',
-    alignContent:'center',
-    alignItems:'center',
-    alignSelf:'center',
-    marginBottom: 500,
-    paddingTop: 50
+  nextGameBtn: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 10,
+    paddingTop: 10,
   },
-  nextGameText:{
+  nextGameText: {
     color: 'black',
     fontFamily: 'Bakbak',
     textAlign: 'center',
     fontSize: 30,
-    marginTop: 70
+    marginTop: 70,
   },
 
-  imageCircle:{
+  imageCircle: {
     backgroundColor: 'white',
     borderRadius: 100,
     width: 120,
     alignSelf: 'center',
     marginTop: 10,
+  },
 
-  }
-
+  bodyText: {
+    fontSize: 14,
+  },
 });
 
 export { theme };

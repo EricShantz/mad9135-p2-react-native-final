@@ -37,7 +37,7 @@ let data = [
   {
     name: 'Mafia',
     description:
-      "Here's a link to the rules!: https://www.instructables.com/How-To-Play-Mafia-with-And-Without-Cards/",
+      'Simply put, the objective of the game is for the mafia to “kill off” civilians until they are the majority, or for the civilians to kill off the entire mafia. When one of those two things happens, the game is over.',
     requirements: 'Playing Cards',
     id: 6,
   },
@@ -79,7 +79,7 @@ let data = [
   {
     name: 'Go Fish',
     description:
-      "Here's a link to the rules of play!: https://bicyclecards.com/how-to-play/go-fish/",
+      'Simply put, the objective of the game is for the mafia to “kill off” civilians until they are the majority, or for the civilians to kill off the entire mafia. When one of those two things happens, the game is over.',
     requirements: 'Playing Cards',
     id: 12,
   },
@@ -93,7 +93,7 @@ let data = [
   {
     name: 'Scrabble',
     description:
-      "Here's a link to the official rules! https://scrabble.hasbro.com/en-us/rules",
+      'Scrabble is a word game in which two to four players score points by placing tiles, each bearing a single letter, onto a game board divided into a 15×15 grid of squares.',
     requirements: 'Scrabble Board',
     id: 14,
   },
@@ -107,14 +107,14 @@ let data = [
   {
     name: 'Monopoly',
     description:
-      "Here's a link to the official rules! https://www.hasbro.com/common/instruct/00009.pdf",
+      'Monopoly, real-estate board game for two to eight players, in which the player’s goal is to remain financially solvent while forcing opponents into bankruptcy by buying and developing pieces of property.',
     requirements: 'Monopoly Board',
     id: 16,
   },
   {
     name: 'Uno',
     description:
-      "Here's a link to the official rules! https://www.ultraboardgames.com/uno/game-rules.php",
+      'UNO is a fast-paced card game played similar to Crazy 8s that includes special cards that ramp up the fun. The goal of UNO is to be the first person to play the very last card in your hand.',
     requirements: 'Uno Cards',
     id: 17,
   },
@@ -142,6 +142,8 @@ let data = [
   {
     name: 'Cards Against Humanity',
     requirements: 'Cards Against Humanity Game',
+    description:
+      'Cards Against Humanity is a game. It is made of cards. You put the cards together to make jokes. It’s pretty stupid.',
     id: 21,
   },
   {
