@@ -1,17 +1,18 @@
 import React from 'react'
-import {Text, Image, ActivityIndicator, ImageBackground, View, Button} from 'react-native'
+import {Text, Image, ActivityIndicator, ImageBackground, View, Button, Dimensions, Pressable} from 'react-native'
 import { StyleSheet} from 'react-native';
 import {useState, useEffect} from 'react'
 import { usePlayersContext } from '../Context/AppContext';
 import { Audio } from 'expo-av';
+import { theme } from '../theme';
 
 
 
 export default function ShuffleScreen() {
   const { players, setPlayers } = usePlayersContext();
   const [player, setPlayer] = useState()
+  const [playerIcon, setPlayerIcon] = useState()
   const [sound, setSound] = useState()
-
 
 async function playSound(){
   console.log("loading Sound")
@@ -32,9 +33,6 @@ useEffect(() => {
     : undefined;
 }, [sound]);
 
-
-
-
 let shufflePlayers =()=>{
   console.log("shuffling")
   let  playerSpin = setInterval(function(){
@@ -42,9 +40,10 @@ let shufflePlayers =()=>{
     players.map((item, index)=>{
       if(passes == index){
         setPlayer(item.name)
+        setPlayerIcon(item.avatar)
       }
     })
-  },120)
+  },70)
 
   setTimeout(function(){
     clearInterval(playerSpin)
@@ -57,20 +56,33 @@ let shufflePlayers =()=>{
 }
 
   return (
-    <View>
-      <Text>To start, shake your phone! this will generate a random player.</Text>
-      <Text>Whoever's name shows up on screen will be the first person to choose a game</Text>
-      <Text>Click next when you're done!</Text>
-      <Text>Player: {player}</Text>
-      <Button title = "Shuffle Players!" onPress={()=>{shufflePlayers()}}></Button>
+    <>
+    <View style={theme.backgroundStylingGameScreen}>
+      <View style={theme.gamesInstructions}>
+        <Text style={theme.textAlign}>Press "Shuffle", if your name shows up you pick the game!</Text>
+      </View>
+
+
+    <View style={theme.playerSpinner}>
+      
+      
+      <Text style={theme.textAlign}>{player}</Text>
+      {playerIcon ?
+      <View style={theme.imageCircle}>
+        <Image source={playerIcon.image} style={theme.playerSpinnerImage}></Image>
+      </View>
+      :
+        <View>
+          <Image source={require('../assets/avatars/shuffle.png')} style={theme.playerSpinnerImageDefault}></Image>
+        </View>
+      }
+
+      <Pressable style={theme.button} onPress={()=>{shufflePlayers()}}>
+        <Text style={theme.text}>Shuffle</Text>
+      </Pressable>
+      
     </View>
+    </View>
+    </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  }
-})
