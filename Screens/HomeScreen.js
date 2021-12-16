@@ -211,6 +211,7 @@ export default function HomeScreen({ navigation }) {
             </View>
           </ScrollView>
         
+
       </View>
 
       <StatusBar style="auto" />
