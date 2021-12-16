@@ -145,6 +145,16 @@ const theme = StyleSheet.create({
   flipCardBack: {
     backgroundColor: 'blue',
   },
+
+  // CARD
+  cardContainer: {
+    transform: [
+      { perspective: 1000 },
+      { rotateX: '30deg' },
+      { rotateZ: '-9deg' },
+      { scale: 1.1 },
+    ],
+  },
 });
 
 export { theme };

@@ -1,108 +1,105 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
+  StyleSheet,
+  Animated,
   Text,
   Button,
-  Image,
-  ActivityIndicator,
-  ImageBackground,
   View,
+  Platform,
+  Dimensions,
+  SafeAreaView,
   Pressable,
 } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import ShuffleScreen from '../Components/Shuffle';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
-import { useState, useEffect } from 'react';
-import data from '../data';
 import {
   FlatList,
-  ScrollView,
   State,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
 import { TapGestureHandler } from 'react-native-gesture-handler';
-import { useRef } from 'react';
-import GestureFlipView from 'react-native-gesture-flip-card';
+// import GestureFlipView from 'react-native-gesture-flip-card';
+import CardFlip from 'react-native-card-flip';
+import GameCard from '../Components/GameCard';
 
 export default function GameScreen() {
   const { players, setPlayers } = usePlayersContext();
   const [showSpin, setShowSpin] = useState(true);
-  console.log(players);
+  // console.log(players);
+
   return (
-
     <>
-      {showSpin ?
-      <>
-        <ShuffleScreen/>
-        <Button title="Next" onPress={()=>{setShowSpin(false)}}></Button> 
+      {showSpin ? (
+        <>
+          {/* Shuffle Component */}
+          <ShuffleScreen />
+          <Button
+            title="Next"
+            onPress={() => {
+              setShowSpin(false);
+            }}
+          ></Button>
         </>
-      :
+      ) : (
+        // MAIN GAME SCREEN
         <SafeAreaView edges={['left', 'right']}>
-        <Text>Choose your Game!</Text>
-        <Text></Text>
-    <FlatList 
-      horizontal={true}
-      data={data}
-      renderItem={(item)=><Games games={item}/>}
-      ></FlatList>
+          <Text>Choose your Game!</Text>
 
-      <View style={theme.nextGameBtn}>
-        <Button title="Choose Next Game" onPress={(()=>{setShowSpin(true)})}></Button>
-      </View>
+          {/* GAME CARDS */}
+          <GameCard />
 
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  }
+          <View style={theme.nextGameBtn}>
+            <Button
+              title="Choose Next Game"
+              onPress={() => {
+                setShowSpin(true);
+              }}
+            ></Button>
+          </View>
+
+          <StatusBar style="auto" />
+        </SafeAreaView>
+      )}
     </>
   );
 }
 
-function Games({ games }) {
-  const doubleTapRef = useRef(null);
-  const [front, setFront] = useState(true);
-  const onDoubleTapEvent = (event) => {
-    if(event.nativeEvent.state === State.ACTIVE){
-        setFront(!front)
-      }
-  }
+// function GameCard({ games, index, scrollX }) {
+//   const doubleTapRef = useRef(null);
+//   const [front, setFront] = useState(true);
+//   const onDoubleTapEvent = (event) => {
+//     if (event.nativeEvent.state === State.ACTIVE) {
+//       setFront(!front);
+//     }
+//   };
 
-  return(
-  <TapGestureHandler
-    ref={doubleTapRef}
-    onActivated={onDoubleTapEvent}
-    numberOfTaps={2}
-    > 
+//   return (
+//     <TapGestureHandler
+//       ref={doubleTapRef}
+//       onActivated={onDoubleTapEvent}
+//       numberOfTaps={2}
+//     >
+//       {front ? (
+//         <Animated.View style={theme.gameCard}>
+//           <Text style={theme.cardText}>{games.item.name}</Text>
+//         </Animated.View>
+//       ) : (
+//         <View style={theme.gameCard}>
+//           <Text style={theme.cardText}>{games.item.description}</Text>
+//         </View>
+//       )}
+//     </TapGestureHandler>
+//   );
+// }
 
-    {front ? 
-  <View style={theme.gameCard}>
-  <Text style={theme.cardText}>{games.item.name}</Text>
-</View>
-:
-<View style={theme.gameCard}>
-  <Text style={theme.cardText}>{games.item.description}</Text>
-</View>
-  } 
-  
-</TapGestureHandler> 
-  )
-
-  return (
-    <TapGestureHandler
-      ref={doubleTapRef}
-      onActivated={onDoubleTapEvent}
-      numberOfTaps={2}
-    >
-      {front ? (
-        <View style={theme.gameCard}>
-          <Text style={theme.cardText}>{games.item.name}</Text>
-        </View>
-      ) : (
-        <View style={theme.gameCard}>
-          <Text style={theme.cardText}>{games.item.description}</Text>
-        </View>
-      )}
-    </TapGestureHandler>
-  );
-}
+// const style = StyleSheet.create({
+//   cardWrapper: {},
+//   cardFront: {
+//     position: 'absolute',
+//   },
+//   cardBack: {
+//     backfaceVisibility: 'hidden',
+//   },
+// });
