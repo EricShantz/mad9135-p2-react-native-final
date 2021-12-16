@@ -62,6 +62,7 @@ export default function GameScreen() {
 function Games({ games }) {
   const doubleTapRef = useRef(null);
   const [front, setFront] = useState(true);
+  
   const onDoubleTapEvent = (event) => {
     if(event.nativeEvent.state === State.ACTIVE){
         setFront(!front)
@@ -87,22 +88,4 @@ function Games({ games }) {
   
 </TapGestureHandler> 
   )
-
-  return (
-    <TapGestureHandler
-      ref={doubleTapRef}
-      onActivated={onDoubleTapEvent}
-      numberOfTaps={2}
-    >
-      {front ? (
-        <View style={theme.gameCard}>
-          <Text style={theme.cardText}>{games.item.name}</Text>
-        </View>
-      ) : (
-        <View style={theme.gameCard}>
-          <Text style={theme.cardText}>{games.item.description}</Text>
-        </View>
-      )}
-    </TapGestureHandler>
-  );
 }

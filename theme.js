@@ -33,16 +33,11 @@ const theme = StyleSheet.create({
     // justifyContent: 'center',
     alignSelf: 'center',
   },
-  addBtn: {
-    zIndex: 1,
-    borderColor: 'black',
-    borderWidth: 2,
-    borderRadius: 20,
-  },
   addBtnText: {
-    fontSize: 15,
-    padding: 5,
+    fontFamily: 'Bakbak',
+    color: '#fff',
     textAlign: 'center',
+    fontSize: 25,
   },
   title: {
     fontSize: 25,
@@ -55,18 +50,57 @@ const theme = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+
+  modal:{
+    backgroundColor: "#30d5c8"
+  },
   playerInput: {
     width: '85%',
+    height: '7%',
+    borderColor: 'black',
+    borderRadius: 40,
+    borderWidth: 1,
+    alignSelf:'center',
+    paddingHorizontal: 20,
+    backgroundColor: 'white',
+  },
+  inputElement:{
+    paddingTop: 8,
+    fontSize:25,
+    textAlignVertical: 'bottom',
+  },
+  bigOlIcon:{
+    marginTop: 50,
+    width: 175,
+    height: 175,
+    alignSelf:'center'
+
   },
   playerContainer: {
     display: 'flex',
     flexDirection: 'column',
     marginHorizontal: 15,
     marginVertical: 20,
-    borderWidth: 1,
-    borderRadius: 50,
-    borderColor: '#fff',
   },
+
+  playerContainerButton:{
+    borderRadius: 80,
+    borderColor: "black",
+    borderWidth: 2,
+    width: 23,
+    marginLeft:30
+  },
+
+  cancelButton:{
+    marginLeft: 75,
+    marginTop: 15
+  },
+
+  cancelButtonText:{
+    fontSize: 20
+  },
+
+
   playerItem: {
     textAlign: 'center',
   },
@@ -145,6 +179,10 @@ const theme = StyleSheet.create({
   flipCardBack: {
     backgroundColor: 'blue',
   },
+
+  keyboardContainer:{
+    flex: 1
+  }
 });
 
 export { theme };
