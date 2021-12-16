@@ -44,7 +44,7 @@ let shufflePlayers =()=>{
         setPlayer(item.name)
       }
     })
-  },120)
+  },110)
 
   setTimeout(function(){
     clearInterval(playerSpin)
