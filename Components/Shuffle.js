@@ -38,13 +38,13 @@ useEffect(() => {
 let shufflePlayers =()=>{
   console.log("shuffling")
   let  playerSpin = setInterval(function(){
-    let passes = Math.floor(Math.random() * players.length + 1);
+    let passes = Math.floor(Math.random() * players.length);
     players.map((item, index)=>{
       if(passes == index){
         setPlayer(item.name)
       }
     })
-  },80)
+  },120)
 
   setTimeout(function(){
     clearInterval(playerSpin)
