@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { SafeAreaView, Alert, TouchableHighlight, Keyboard, Dimensions, Platform } from 'react-native';
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  Alert,
+  Keyboard,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import {
   Text,
   Image,
@@ -9,22 +15,14 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import {
-  ScrollView,
-  FlatList,
-} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
-import { useFonts } from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { GameScreen } from './GameScreen';
 
 let globalPlayers;
 let globalSetPlayers;
-const AppStack = createStackNavigator();
 
 export default function HomeScreen({ navigation }) {
   const { players, setPlayers } = usePlayersContext();
@@ -66,7 +64,6 @@ export default function HomeScreen({ navigation }) {
       edges={['left', 'right']}
       style={(theme.container, theme.backgroundStyling)}
     >
-
       <FlatList
         horizontal={true}
         data={players}
@@ -92,64 +89,68 @@ export default function HomeScreen({ navigation }) {
       ></FlatList>
 
       {/* ===============================POPUP=============================*/}
-      <Modal animationType="slide" transparent={false} visible={showModal} >
-      <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? 'padding' : "height" }
-      style={theme.keyboardContainer}
-      style={theme.modal}>
-      <Pressable style={{height: Dimensions.get('screen').height}} onPress={()=>{Keyboard.dismiss()}}>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={theme.title}>Enter Player Name</Text>
+      <Modal animationType="slide" transparent={false} visible={showModal}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={theme.keyboardContainer}
+          style={theme.modal}
+        >
           <Pressable
-          style={theme.cancelButton}
+            style={{ height: Dimensions.get('screen').height }}
             onPress={() => {
-              setShowModal(false);
+              Keyboard.dismiss();
             }}
           >
-            <Text style={theme.cancelButtonText}>Cancel</Text>
-          </Pressable>
-        </View>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={theme.title}>Enter Player Name</Text>
+              <Pressable
+                style={theme.cancelButton}
+                onPress={() => {
+                  setShowModal(false);
+                }}
+              >
+                <Text style={theme.cancelButtonText}>Cancel</Text>
+              </Pressable>
+            </View>
 
-  {chosenAvatar != undefined &&
-        <Image
-          source={chosenAvatar.image}
-          style={theme.bigOlIcon}
-        />
-  }
-        
-        <View style={theme.playerInput}>
-          <TextInput
-          style={theme.inputElement}
-            placeholder="New Player"r
-            onChangeText={(text) => {
-              setPlayer({
-                name: text,
-                id: Math.random() * 1000,
-                avatar: chosenAvatar,
-              });
-            }}
-          />
-        </View>
-        <Pressable style={theme.button}
-          onPress={() => {
-            if (player.name == undefined) {
-              return showAlert();
-            } else {
-              setPlayers([...players, player]);
-              addPlayer();
-              setShowModal(false);
-              setPlayer({});
-            }
-          }}
-          >
-          <Text style={theme.addBtnText}>Add Player</Text>
-        </Pressable>
-      </Pressable>
-      </KeyboardAvoidingView>
+            {chosenAvatar != undefined && (
+              <Image source={chosenAvatar.image} style={theme.bigOlIcon} />
+            )}
+
+            <View style={theme.playerInput}>
+              <TextInput
+                style={theme.inputElement}
+                placeholder="New Player"
+                r
+                onChangeText={(text) => {
+                  setPlayer({
+                    name: text,
+                    id: Math.random() * 1000,
+                    avatar: chosenAvatar,
+                  });
+                }}
+              />
+            </View>
+            <Pressable
+              style={theme.button}
+              onPress={() => {
+                if (player.name == undefined) {
+                  return showAlert();
+                } else {
+                  setPlayers([...players, player]);
+                  addPlayer();
+                  setShowModal(false);
+                  setPlayer({});
+                }
+              }}
+            >
+              <Text style={theme.addBtnText}>Add Player</Text>
+            </Pressable>
+          </Pressable>
+        </KeyboardAvoidingView>
       </Modal>
       {/* ==============================POPUP END============================= */}
 
-      
       <View style={theme.container}>
         {players.length >= 2 ? (
           <Pressable
@@ -180,28 +181,31 @@ export default function HomeScreen({ navigation }) {
         </Text>
 
         {/* AVATARS LIST */}
-      
-          <ScrollView style={theme.avatarList} contentContainerStyle={{flex: 1}}>
-            <View style={theme.avatarList}>
-              {avatars.map((item) => {
-                return (
-                  <Pressable
-                    onPress={() => {
-                      setChosenAvatar(item);
-                      setShowModal(true);
-                    }}
-                    key={item + Date.now() + Math.random() * 21}
-                    style={theme.avatarContainer}
-                  >
-                    <Image
-                      source={item.image}
-                      style={{ width: 90, height: 90 }}
-                    />
-                  </Pressable>
-                );
-              })}
-            </View>
-          </ScrollView>
+
+        <ScrollView
+          style={theme.avatarList}
+          contentContainerStyle={{ flex: 1 }}
+        >
+          <View style={theme.avatarList}>
+            {avatars.map((item) => {
+              return (
+                <Pressable
+                  onPress={() => {
+                    setChosenAvatar(item);
+                    setShowModal(true);
+                  }}
+                  key={item + Date.now() + Math.random() * 21}
+                  style={theme.avatarContainer}
+                >
+                  <Image
+                    source={item.image}
+                    style={{ width: 90, height: 90 }}
+                  />
+                </Pressable>
+              );
+            })}
+          </View>
+        </ScrollView>
       </View>
 
       <StatusBar style="auto" />
@@ -213,12 +217,13 @@ function Player({ players, setPlayers }) {
   let id = players.item.id;
   return (
     <View style={theme.playerContainer}>
-      <Pressable style={theme.playerContainerButton} 
+      <Pressable
+        style={theme.playerContainerButton}
         onPress={() => {
           deletePlayer(id, players, setPlayers);
         }}
       >
-        <Text style={{textAlign:'center'}}>X</Text>
+        <Text style={{ textAlign: 'center' }}>X</Text>
       </Pressable>
       <Image
         source={players.item.avatar.image}
