@@ -37,8 +37,8 @@ export default function GameCard({ games }) {
         contentContainerStyle={{ justifyContent: 'center' }}
         horizontal={true}
         data={data}
+        showsHorizontalScrollIndicator= {false}
         snapToInterval={ITEM_SIZE}
-        bounces={false}
         decelerationRate={0}
         onScroll={Animated.event(
           [
@@ -138,6 +138,13 @@ function Card({ games, index }) {
             <ScrollView
               contentContainerStyle={{ paddingTop: 25, paddingBottom: 25 }}
             >
+              <Text style={{fontSize: 22,
+                  textAlign: 'center',
+                  padding: 5,
+                  fontFamily: 'Bakbak',
+                  color:'black'}}>
+                    {games.name}
+                  </Text>
               <Text style={{ fontSize: 16 }}>{games.description}</Text>
             </ScrollView>
           </Animated.View>
