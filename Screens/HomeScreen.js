@@ -171,35 +171,33 @@ export default function HomeScreen({ navigation }) {
         </Text>
 
         {/* AVATARS LIST */}
-        <TouchableOpacity>
-          <ScrollView
-            style={theme.avatarList}
-            contentContainerStyle={{
-              flex: 1,
-            }}
-            contentInset={{ bottom: 200, left: 0, right: 0 }}
-          >
-            <View style={theme.avatarList}>
-              {avatars.map((item) => {
-                return (
-                  <Pressable
-                    onPress={() => {
-                      setChosenAvatar(item);
-                      setShowModal(true);
-                    }}
-                    key={item + Date.now() + Math.random() * 21}
-                    style={theme.avatarContainer}
-                  >
-                    <Image
-                      source={item.image}
-                      style={{ width: 90, height: 90 }}
-                    />
-                  </Pressable>
-                );
-              })}
-            </View>
-          </ScrollView>
-        </TouchableOpacity>
+        <ScrollView
+          style={theme.avatarList}
+          contentContainerStyle={{
+            flex: 1,
+          }}
+          contentInset={{ bottom: 200, left: 0, right: 0 }}
+        >
+          <View style={theme.avatarList}>
+            {avatars.map((item) => {
+              return (
+                <Pressable
+                  onPress={() => {
+                    setChosenAvatar(item);
+                    setShowModal(true);
+                  }}
+                  key={item + Date.now() + Math.random() * 21}
+                  style={theme.avatarContainer}
+                >
+                  <Image
+                    source={item.image}
+                    style={{ width: 90, height: 90 }}
+                  />
+                </Pressable>
+              );
+            })}
+          </View>
+        </ScrollView>
       </View>
 
       <StatusBar style="auto" />
