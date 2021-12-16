@@ -8,20 +8,19 @@ const theme = StyleSheet.create({
     backgroundColor: '#30d5c8',
   },
   backgroundStylingGameScreen: {
-    // backgroundColor: '#30d5c8',
     backgroundColor: '#FFF',
   },
   tab: {
     backgroundColor: '#30d5c8',
   },
   avatarContainer: {
+    // change the margin, border and padding to make all 12 icons fit the screen
     borderRadius: 10,
     borderWidth: 2,
     borderStyle: 'solid',
     borderColor: 'rgba(255, 255, 255, 0.2)',
     margin: 8,
     padding: 5,
-    borderRadius: 10,
   },
   container: {
     flexDirection: 'column',
@@ -33,10 +32,9 @@ const theme = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    // justifyContent: 'center',
     alignSelf: 'center',
     // ==============================Here's the thing thats hiding the top flatlist on the home page
-    marginBottom:500
+    // marginBottom:500
 
   },
   addBtnText: {
@@ -63,9 +61,7 @@ const theme = StyleSheet.create({
   playerInput: {
     width: '85%',
     height: '7%',
-    borderColor: 'black',
     borderRadius: 40,
-    borderWidth: 1,
     alignSelf:'center',
     paddingHorizontal: 20,
     backgroundColor: 'white',
@@ -112,14 +108,12 @@ const theme = StyleSheet.create({
   },
 
   playersListContainer: {
-    marginTop: 20,
     borderRadius: 15,
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     width: '90%',
-    height: '25%',
+    height: '20%',
     alignSelf: 'center',
     textAlign: 'center',
-    // paddingTop: 100
   },
 
   button: {

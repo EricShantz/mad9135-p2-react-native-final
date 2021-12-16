@@ -62,11 +62,11 @@ let shufflePlayers =()=>{
         <Text style={theme.textAlign}>Press "Shuffle", if your name shows up you pick the game!</Text>
       </View>
 
-    <View style={theme.playerSpinner}>
-      <Pressable style={theme.button} onPress={()=>{shufflePlayers()}}>
-        <Text style={theme.text}>Shuffle</Text>
-      </Pressable>
 
+    <View style={theme.playerSpinner}>
+      
+      
+      <Text style={theme.textAlign}>{player}</Text>
       {playerIcon ?
       <View style={theme.imageCircle}>
         <Image source={playerIcon.image} style={theme.playerSpinnerImage}></Image>
@@ -74,11 +74,13 @@ let shufflePlayers =()=>{
       :
         <View>
           <Image source={require('../assets/avatars/shuffle.png')} style={theme.playerSpinnerImageDefault}></Image>
-          <Text style={ theme.textAlign}>Press Shuffle</Text>
         </View>
       }
+
+      <Pressable style={theme.button} onPress={()=>{shufflePlayers()}}>
+        <Text style={theme.text}>Shuffle</Text>
+      </Pressable>
       
-        <Text style={theme.textAlign}>{player}</Text>
     </View>
     </View>
     </>
