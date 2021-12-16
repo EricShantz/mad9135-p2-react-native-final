@@ -6,17 +6,17 @@ import {
   View,
   Platform,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
-import { State } from 'react-native-gesture-handler';
+import { ScrollView, State } from 'react-native-gesture-handler';
 import { TapGestureHandler } from 'react-native-gesture-handler';
-// import GestureFlipView from 'react-native-gesture-flip-card';
-import CardFlip from 'react-native-card-flip';
+import theme from '../theme';
 import data from '../data';
 
 const { width, height } = Dimensions.get('window');
 const SPACING = 10;
 const ITEM_SIZE = Platform.OS === 'ios' ? width * 0.72 : width * 0.74;
-const BACKDROP_HEIGHT = height * 50;
+const BACKDROP_HEIGHT = height * 0.65;
 const SPACER_ITEM_SIZE = (width - ITEM_SIZE) / 2;
 let globalGamesArray = [];
 let globalScrollX;
@@ -24,46 +24,6 @@ let globalScrollX;
 export default function GameCard({ games }) {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   globalScrollX = scrollX;
-
-  //CARD ANIMATION
-  const flipAnimation = useRef(new Animated.Value(0)).current;
-  let flipRotation = 0;
-  flipAnimation.addListener(({ value }) => (flipRotation = value));
-  const flipToFrontStyle = {
-    transform: [
-      {
-        rotateY: flipAnimation.interpolate({
-          inputRange: [0, 180],
-          outputRange: ['0deg', '180deg'],
-        }),
-      },
-    ],
-  };
-  const flipToBackStyle = {
-    transform: [
-      {
-        rotateY: flipAnimation.interpolate({
-          inputRange: [0, 180],
-          outputRange: ['180deg', '360deg'],
-        }),
-      },
-    ],
-  };
-
-  const flipToFront = () => {
-    Animated.timing(flipAnimation, {
-      toValue: 180,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-  const flipToBack = () => {
-    Animated.timing(flipAnimation, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
 
   return (
     <View
@@ -88,7 +48,7 @@ export default function GameCard({ games }) {
           ],
           { useNativeDriver: true }
         )}
-        scrollEventThrottle={16}
+        scrollEventThrottle={10}
         renderItem={({ item, index }) => <Card games={item} index={index} />}
       ></Animated.FlatList>
     </View>
@@ -96,8 +56,6 @@ export default function GameCard({ games }) {
 }
 
 function Card({ games, index }) {
-  console.log(games);
-  console.log('LOOOO', index.item);
   const inputRange = [
     (index - 1) * ITEM_SIZE,
     index * ITEM_SIZE,
@@ -119,8 +77,6 @@ function Card({ games, index }) {
     }
   };
 
-  console.log('SNISS');
-
   return (
     <View style={{ width: ITEM_SIZE }}>
       <TapGestureHandler
@@ -136,16 +92,34 @@ function Card({ games, index }) {
               padding: SPACING * 2,
               alignItems: 'center',
               transform: [{ translateY }],
-              backgroundColor: 'pink',
               borderRadius: 34,
               height: ITEM_SIZE * 1.2,
               borderWidth: 20,
+              backgroundColor: '#128594',
               borderColor: 'white',
             }}
           >
-            <Text style={{ fontSize: 24 }} numberOfLines={1}>
-              {games.name}
-            </Text>
+            <ImageBackground
+              resizeMode={'fit'} // or cover
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                width: ITEM_SIZE - 60,
+              }}
+              source={require('../assets/card_pattern.png')}
+            >
+              <Text
+                style={{
+                  fontSize: 24,
+                  textAlign: 'center',
+                  backgroundColor: 'orange',
+                  padding: 5,
+                }}
+                numberOfLines={3}
+              >
+                {games.name}
+              </Text>
+            </ImageBackground>
           </Animated.View>
         ) : (
           <Animated.View
@@ -159,39 +133,14 @@ function Card({ games, index }) {
               height: ITEM_SIZE * 1.2,
             }}
           >
-            <Text style={{ fontSize: 12 }} numberOfLines={5}>
-              {games.description}
-            </Text>
+            <ScrollView
+              contentContainerStyle={{ paddingTop: 25, paddingBottom: 25 }}
+            >
+              <Text style={{ fontSize: 16 }}>{games.description}</Text>
+            </ScrollView>
           </Animated.View>
         )}
       </TapGestureHandler>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  container: {
-    flex: 1,
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
-
-const style = StyleSheet.create({
-  cardWrapper: {},
-  cardFront: {
-    position: 'absolute',
-  },
-  cardBack: {
-    backfaceVisibility: 'hidden',
-  },
-});
