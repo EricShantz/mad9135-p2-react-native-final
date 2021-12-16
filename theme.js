@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const theme = StyleSheet.create({
+  font: {
+    fontFamily: 'Bakbak',
+  },
   backgroundStyling: {
     backgroundColor: '#30d5c8',
   },
@@ -88,44 +91,60 @@ const theme = StyleSheet.create({
     margin: 15,
     alignSelf: 'center',
   },
+  disabledButton: {
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: '#909090',
+    borderRadius: 10,
+    flexWrap: 'wrap',
+    margin: 15,
+    alignSelf: 'center',
+  },
   text: {
     fontFamily: 'Bakbak',
     color: '#fff',
     textAlign: 'center',
     fontSize: 25,
   },
+  disabledText: {
+    textAlign: 'center',
+    fontSize: 25,
+    fontFamily: 'Bakbak',
+    color: '#555555',
+  },
 
-  gameCard:{
+  gameCard: {
     marginTop: 100,
     height: 300,
     width: 200,
     borderColor: 'black',
-    borderWidth:2,
+    borderWidth: 2,
     marginHorizontal: 5,
     borderRadius: 20,
-    textAlign: 'center'
-  },
-
-  cardText:{
     textAlign: 'center',
-    marginTop:50,
-    fontSize:25,
-    paddingHorizontal: 10
   },
 
-  nextGameBtn:{
+  cardText: {
+    textAlign: 'center',
+    marginTop: 50,
+    fontSize: 25,
+    paddingHorizontal: 10,
+  },
+
+  nextGameBtn: {
     marginTop: 50,
   },
 
-  flipCard:{
-    fontSize:16
+  flipCard: {
+    fontSize: 16,
   },
-  flipCardFront:{
-    backgroundColor: 'red'
+  flipCardFront: {
+    backgroundColor: 'red',
   },
-  flipCardBack:{
-  backgroundColor:'blue'  }
-
+  flipCardBack: {
+    backgroundColor: 'blue',
+  },
 });
 
 export { theme };
