@@ -6,16 +6,11 @@ import {
   Button,
   View,
   Platform,
-  Dimensions,
   SafeAreaView,
   Pressable,
   Dimensions,
 } from 'react-native';
-
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native';
-
 import { StatusBar } from 'expo-status-bar';
 import ShuffleScreen from '../Components/Shuffle';
 import { theme } from '../theme';
