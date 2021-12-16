@@ -31,7 +31,7 @@ export default function GameScreen() {
   // console.log(players);
 
   return (
-    <View style={theme.backgroundStyling}>
+    <View style={theme.backgroundStylingGameScreen}>
       {showSpin ? (
         <>
           <ShuffleScreen />
@@ -44,13 +44,13 @@ export default function GameScreen() {
       ) : (
         // MAIN GAME SCREEN
         <SafeAreaView edges={['left', 'right']}>
-          <Text>Choose your Game!</Text>
+          <Text style={theme.text}>Choose your Game!</Text>
+          <Text style={{fontSize:17, color: 'white', textAlign:'center' }}>Double-tap to see instructions</Text>
 
           {/* GAME CARDS */}
           <GameCard />
 
- 
-            <View style={theme.nextGameBtn}>
+            <View style={theme.nextGameBtnGameScreen, {marginTop: -50, marginBottom: 50}}>
         <Pressable onPress={()=>{setShowSpin(true)}} style={theme.button} >
           <Text style={theme.text}>Next Round</Text>
         </Pressable>

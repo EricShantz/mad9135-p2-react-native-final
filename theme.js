@@ -5,9 +5,15 @@ const theme = StyleSheet.create({
     fontFamily: 'Bakbak',
   },
   backgroundStyling: {
+    // blue
     backgroundColor: '#30d5c8',
   },
   backgroundStylingGameScreen: {
+    // Orange
+    backgroundColor: '#FF9E3F',
+  },
+  backgroundStylingGameScreenWhite: {
+    // white
     backgroundColor: '#FFF',
   },
   tab: {
@@ -242,11 +248,8 @@ const theme = StyleSheet.create({
     fontSize: 20,
   },
   nextGameBtnShuffle: {
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
     alignSelf: 'center',
-    marginLeft: 80,
+    marginLeft: Dimensions.get('screen').width/3.5,
     marginBottom: 500,
     backgroundColor: 'white',
     width: 500,

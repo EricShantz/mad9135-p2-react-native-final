@@ -33,12 +33,12 @@ export default function GameCard({ games }) {
       }}
     >
       <Animated.FlatList
-        style={{ paddingLeft: 50, paddingRight: 50 }}
+        style={{ paddingLeft: 50, paddingRight: 50}}
         contentContainerStyle={{ justifyContent: 'center' }}
         horizontal={true}
         data={data}
+        showsHorizontalScrollIndicator= {false}
         snapToInterval={ITEM_SIZE}
-        bounces={false}
         decelerationRate={0}
         onScroll={Animated.event(
           [
@@ -48,7 +48,7 @@ export default function GameCard({ games }) {
           ],
           { useNativeDriver: true }
         )}
-        scrollEventThrottle={10}
+        scrollEventThrottle={8}
         renderItem={({ item, index }) => <Card games={item} index={index} />}
       ></Animated.FlatList>
     </View>
@@ -100,7 +100,7 @@ function Card({ games, index }) {
             }}
           >
             <ImageBackground
-              resizeMode={'fit'} // or cover
+              // resizeMode={'fit'} // or cover
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -112,8 +112,10 @@ function Card({ games, index }) {
                 style={{
                   fontSize: 24,
                   textAlign: 'center',
-                  backgroundColor: 'orange',
+                  backgroundColor: '#E30A5C',
                   padding: 5,
+                  fontFamily: 'Bakbak',
+                  color:'white'
                 }}
                 numberOfLines={3}
               >
@@ -136,6 +138,13 @@ function Card({ games, index }) {
             <ScrollView
               contentContainerStyle={{ paddingTop: 25, paddingBottom: 25 }}
             >
+              <Text style={{fontSize: 22,
+                  textAlign: 'center',
+                  padding: 5,
+                  fontFamily: 'Bakbak',
+                  color:'black'}}>
+                    {games.name}
+                  </Text>
               <Text style={{ fontSize: 16 }}>{games.description}</Text>
             </ScrollView>
           </Animated.View>

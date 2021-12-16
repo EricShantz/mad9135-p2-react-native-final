@@ -39,14 +39,14 @@ export default function App() {
         <Tab.Navigator
           initialRouteName="Home"
           screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
+            tabBarIcon: ({ focused,  size }) => {
               let iconName;
               if (route.name === 'Home') {
                 iconName = focused ? 'home' : 'home-outline';
               } else {
                 iconName = focused ? 'apps' : 'apps-outline';
               }
-              return <Ionicons name={iconName} color={color} size={size} />;
+              return <Ionicons name={iconName} color={'#81FFFA'} size={size} />;
             },
           })}
         >
@@ -57,19 +57,23 @@ export default function App() {
               headerStyle: {
                 backgroundColor: '#30d5c8',
               },
+              headerTitleAlign:'center',
               headerTitleStyle: {
                 color: 'black',
-                fontSize: 25,
+                fontSize: 20,
               },
-              tabBarActiveBackgroundColor: '#fff',
-              // tabBarInactiveBackgroundColor: '#',
+              tabBarActiveBackgroundColor: '#414141',
+              tabBarInactiveBackgroundColor: '#121212',
               tabBarLabelStyle: {
-                color: 'black',
+                color: 'white',
                 fontSize: 14,
               },
               tabBarStyle: {
+                height: Dimensions.get('screen').height/14,
                 borderTopColor: '#C6EB27',
+
               },
+              
             }}
           />
           <Tab.Screen
@@ -77,21 +81,23 @@ export default function App() {
             component={GameScreen}
             options={{
               headerStyle: {
-                backgroundColor: '#30d5c8',
+                backgroundColor: '#FF9E3F',
                 shadowColor: 'transparent',
               },
+              headerTitleAlign:'center',
               headerTitleStyle: {
                 color: 'black',
-                fontSize: 25,
+                fontSize: 20,
               },
-              tabBarActiveBackgroundColor: '#fff',
-              // tabBarInactiveBackgroundColor: '#BE0000',
+              tabBarActiveBackgroundColor: '#414141',
+              tabBarInactiveBackgroundColor: '#121212',
               tabBarLabelStyle: {
-                color: 'black',
+                color: 'white',
                 fontSize: 14,
               },
               tabBarStyle: {
                 borderTopColor: '#BE0000',
+                height: Dimensions.get('screen').height/14,
               },
             }}
           />
