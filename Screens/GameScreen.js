@@ -29,6 +29,7 @@ export default function GameScreen() {
   console.log(players);
   return (
 <>
+<Text>{player.name}</Text>
       {showSpin ?
       <>
         <ShuffleScreen/>
