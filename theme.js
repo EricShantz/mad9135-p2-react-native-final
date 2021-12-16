@@ -182,7 +182,54 @@ const theme = StyleSheet.create({
 
   keyboardContainer:{
     flex: 1
+  },
+
+  gamesInstructions:{
+    marginVertical: 50,
+    textAlign:'center',
+    paddingHorizontal: 15
+  },
+
+  playerSpinner:{
+    // height: 200,
+  },
+
+  playerSpinnerImage:{
+    width: 100,
+    height: 100,
+    marginVertical: 8,
+    alignSelf: 'center'
+  },
+  textAlign:{
+    textAlign:'center',
+    fontSize: 20
+  },
+  nextGameBtn:{
+    justifyContent:'center',
+    alignContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
+    marginLeft: 80,
+    marginBottom: 500
+  },
+  nextGameText:{
+    color: 'black',
+    fontFamily: 'Bakbak',
+    textAlign: 'center',
+    fontSize: 30,
+    marginTop: 70
+  },
+
+  imageCircle:{
+    backgroundColor: 'white',
+    borderRadius: 100,
+    width: 120,
+    alignSelf: 'center',
+    marginTop: 10,
+
   }
+
+  
 });
 
 export { theme };

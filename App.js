@@ -64,15 +64,15 @@ export default function App() {
             component={GameScreen}
             options={{
               headerStyle: {
-                backgroundColor: '#BE0000',
+                backgroundColor: '#30d5c8',
                 shadowColor: 'transparent',
               },
               headerTitleStyle: {
                 color: 'black',
                 fontSize: 25,
               },
-              tabBarActiveBackgroundColor: '#610000',
-              tabBarInactiveBackgroundColor: '#BE0000',
+              tabBarActiveBackgroundColor: '#fff',
+              // tabBarInactiveBackgroundColor: '#BE0000',
               tabBarLabelStyle: {
                 color: 'black',
                 fontSize: 14,

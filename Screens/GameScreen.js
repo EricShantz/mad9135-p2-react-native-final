@@ -7,7 +7,9 @@ import {
   ImageBackground,
   View,
   Pressable,
+  Dimensions,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -32,14 +34,20 @@ export default function GameScreen() {
   console.log(players);
   return (
 
-    <>
-      {showSpin ?
+<View style={theme.backgroundStyling}>
+    {showSpin ?
       <>
         <ShuffleScreen/>
-        <Button title="Next" onPress={()=>{setShowSpin(false)}}></Button> 
-        </>
+        <Pressable onPress={()=>{setShowSpin(false)}}
+        style={theme.nextGameBtn}>
+          <Text style={theme.nextGameText}>Pick Game 
+          <Ionicons name="arrow-forward-outline" style={{fontSize: 25}}></Ionicons>          </Text>
+        </Pressable> 
+      </>
+
       :
-        <SafeAreaView edges={['left', 'right']}>
+
+      <SafeAreaView edges={['left', 'right']} >
         <Text>Choose your Game!</Text>
         <Text></Text>
     <FlatList 
@@ -55,7 +63,7 @@ export default function GameScreen() {
       <StatusBar style="auto" />
     </SafeAreaView>
   }
-    </>
+    </View>
   );
 }
 
