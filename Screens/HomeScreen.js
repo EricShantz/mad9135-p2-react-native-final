@@ -8,7 +8,11 @@ import {
   ActivityIndicatorBase,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, FlatList } from 'react-native-gesture-handler';
+import {
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
@@ -82,7 +86,7 @@ export default function HomeScreen({ navigation }) {
                 fontFamily: 'Bakbak',
               }}
             >
-              Your chosen players will go here
+              Please choose at least two players.
             </Text>
           )
         }
@@ -167,7 +171,7 @@ export default function HomeScreen({ navigation }) {
         </Text>
 
         {/* AVATARS LIST */}
-        <View style={theme.avatarListContainer}>
+        <TouchableOpacity>
           <ScrollView
             style={theme.avatarList}
             contentContainerStyle={{
@@ -195,7 +199,7 @@ export default function HomeScreen({ navigation }) {
               })}
             </View>
           </ScrollView>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <StatusBar style="auto" />
