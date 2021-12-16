@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SafeAreaView, Alert, TouchableHighlight } from 'react-native';
-import {Text, Image, View, Pressable, ActivityIndicatorBase} from 'react-native';
+import {
+  Text,
+  Image,
+  View,
+  Pressable,
+  ActivityIndicatorBase,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,14 +16,13 @@ import { usePlayersContext } from '../Context/AppContext';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {GameScreen} from './GameScreen'
-
+import { GameScreen } from './GameScreen';
 
 let globalPlayers;
 let globalSetPlayers;
 const AppStack = createStackNavigator();
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({ navigation }) {
   const { players, setPlayers } = usePlayersContext();
   globalPlayers = players;
   globalSetPlayers = setPlayers;
@@ -125,19 +130,27 @@ export default function HomeScreen({navigation}) {
       </Modal>
       {/* POPUP END */}
 
-      <View style={theme.buttonContainer}>
+      {/* <View style={theme.buttonContainer}>
         {players.length < 2 && (
           <Pressable style={theme.button}>
             <Text style={theme.text}>{'Start Playing!'}</Text>
           </Pressable>
         )}
-      </View>
+      </View> */}
       <View style={theme.container}>
-        {players.length >= 2 && (
-
-          <Pressable style={theme.button} onPress={() => {}}>
+        {players.length >= 2 ? (
+          <Pressable
+            style={theme.button}
+            onPress={() => {
+              navigation.navigate('Games');
+            }}
+          >
             <Text style={theme.text}>{'Start Playing!'}</Text>
-          </Pressable> 
+          </Pressable>
+        ) : (
+          <Pressable style={theme.disabledButton}>
+            <Text style={theme.disabledText}>{'Start Playing!'}</Text>
+          </Pressable>
         )}
       </View>
 
