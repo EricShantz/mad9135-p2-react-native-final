@@ -57,7 +57,7 @@ let shufflePlayers =()=>{
 
   return (
     <>
-    <View style={theme.backgroundStyling}>
+    <View style={theme.backgroundStylingGameScreen}>
       <View style={theme.gamesInstructions}>
         <Text style={theme.textAlign}>Press "Shuffle", if your name shows up you pick the game!</Text>
       </View>
@@ -73,7 +73,7 @@ let shufflePlayers =()=>{
       </View>
       :
         <View>
-          <Image source={require('../assets/avatars/shuffle.png')} style={theme.playerSpinnerImage}></Image>
+          <Image source={require('../assets/avatars/shuffle.png')} style={theme.playerSpinnerImageDefault}></Image>
           <Text style={ theme.textAlign}>Press Shuffle</Text>
         </View>
       }
