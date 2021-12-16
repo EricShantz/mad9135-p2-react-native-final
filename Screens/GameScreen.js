@@ -39,7 +39,7 @@ export default function GameScreen() {
       <>
         <ShuffleScreen/>
         <Pressable onPress={()=>{setShowSpin(false)}}
-        style={theme.nextGameBtn}>
+        style={theme.nextGameBtnShuffle}>
           <Text style={theme.nextGameText}>Pick Game 
           <Ionicons name="arrow-forward-outline" style={{fontSize: 25}}></Ionicons>          </Text>
         </Pressable> 
@@ -48,16 +48,18 @@ export default function GameScreen() {
       :
 
       <SafeAreaView edges={['left', 'right']} >
-        <Text>Choose your Game!</Text>
-        <Text></Text>
+        <Text style={theme.text}>Double-Tap to choose your Game!</Text>
     <FlatList 
+    style={{marginTop:-50}}
       horizontal={true}
       data={data}
       renderItem={(item)=><Games games={item}/>}
       ></FlatList>
 
       <View style={theme.nextGameBtn}>
-        <Button title="Choose Next Game" onPress={(()=>{setShowSpin(true)})}></Button>
+        <Pressable onPress={()=>{setShowSpin(true)}} style={theme.button} >
+          <Text style={theme.text}>Next Round</Text>
+        </Pressable>
       </View>
 
       <StatusBar style="auto" />
@@ -89,8 +91,10 @@ function Games({ games }) {
   <Text style={theme.cardText}>{games.item.name}</Text>
 </View>
 :
-<View style={theme.gameCard}>
-  <Text style={theme.cardText}>{games.item.description}</Text>
+<View style={theme.gameCardBack}>
+  <ScrollView>
+  <Text style={theme.cardTextBack}>{games.item.description}</Text>
+  </ScrollView>
 </View>
   } 
   

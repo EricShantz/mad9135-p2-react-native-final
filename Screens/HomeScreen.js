@@ -61,13 +61,11 @@ export default function HomeScreen({ navigation }) {
       },
     ]);
 
-    console.log(chosenAvatar)
   return (
     <SafeAreaView
       edges={['left', 'right']}
       style={(theme.container, theme.backgroundStyling)}
     >
-      {/* <Text style={theme.listTitle}>List of Players</Text> */}
 
       <FlatList
         horizontal={true}
@@ -184,11 +182,11 @@ export default function HomeScreen({ navigation }) {
         {/* AVATARS LIST */}
       
           <ScrollView
-            style={theme.avatarList}
-            contentContainerStyle={{
-              flex: 1,
-            }}
-            contentInset={{ bottom: 200, left: 0, right: 0 }}
+            // style={theme.avatarList}
+            // contentContainerStyle={{
+            //   flex: 1,
+            // }}
+            // contentInset={{ bottom: 200, left: 0, right: 0 }}
           >
             <View style={theme.avatarList}>
               {avatars.map((item) => {
@@ -210,8 +208,6 @@ export default function HomeScreen({ navigation }) {
               })}
             </View>
           </ScrollView>
-        
-
       </View>
 
       <StatusBar style="auto" />
