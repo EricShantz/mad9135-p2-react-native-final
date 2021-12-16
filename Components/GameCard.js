@@ -33,7 +33,7 @@ export default function GameCard({ games }) {
       }}
     >
       <Animated.FlatList
-        style={{ paddingLeft: 50, paddingRight: 50 }}
+        style={{ paddingLeft: 50, paddingRight: 50}}
         contentContainerStyle={{ justifyContent: 'center' }}
         horizontal={true}
         data={data}
@@ -48,7 +48,7 @@ export default function GameCard({ games }) {
           ],
           { useNativeDriver: true }
         )}
-        scrollEventThrottle={10}
+        scrollEventThrottle={8}
         renderItem={({ item, index }) => <Card games={item} index={index} />}
       ></Animated.FlatList>
     </View>
@@ -100,7 +100,7 @@ function Card({ games, index }) {
             }}
           >
             <ImageBackground
-              resizeMode={'fit'} // or cover
+              // resizeMode={'fit'} // or cover
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -112,8 +112,10 @@ function Card({ games, index }) {
                 style={{
                   fontSize: 24,
                   textAlign: 'center',
-                  backgroundColor: 'orange',
+                  backgroundColor: '#E30A5C',
                   padding: 5,
+                  fontFamily: 'Bakbak',
+                  color:'white'
                 }}
                 numberOfLines={3}
               >

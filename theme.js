@@ -5,9 +5,15 @@ const theme = StyleSheet.create({
     fontFamily: 'Bakbak',
   },
   backgroundStyling: {
+    // blue
     backgroundColor: '#30d5c8',
   },
   backgroundStylingGameScreen: {
+    // Orange
+    backgroundColor: '#FF9E3F',
+  },
+  backgroundStylingGameScreenWhite: {
+    // white
     backgroundColor: '#FFF',
   },
   tab: {

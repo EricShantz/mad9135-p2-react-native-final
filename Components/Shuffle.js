@@ -57,7 +57,7 @@ let shufflePlayers =()=>{
 
   return (
     <>
-    <View style={theme.backgroundStylingGameScreen}>
+    <View style={theme.backgroundStylingGameScreenWhite}>
       <View style={theme.gamesInstructions}>
         <Text style={theme.textAlign}>Press "Shuffle", if your name shows up you pick the game!</Text>
       </View>
