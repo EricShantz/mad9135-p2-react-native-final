@@ -61,7 +61,6 @@ function Games({games}){
   const [front, setFront] = useState(true)
   const onDoubleTapEvent = (event) => {
     if(event.nativeEvent.state === State.ACTIVE){
-        console.log("FUCK")
         setFront(!front)
       }
   }
