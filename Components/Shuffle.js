@@ -38,6 +38,7 @@ let shufflePlayers =()=>{
   let  playerSpin = setInterval(function(){
     let passes = Math.floor(Math.random() * players.length);
     players.map((item, index)=>{
+      console.log("PLAYERS", players)
       if(passes == index){
         setPlayer(item.name)
         setPlayerIcon(item.avatar)
@@ -69,7 +70,7 @@ let shufflePlayers =()=>{
       <Text style={theme.textAlign}>{player}</Text>
       {playerIcon ?
       <View style={theme.imageCircle}>
-        <Image source={playerIcon.image} style={theme.playerSpinnerImage}></Image>
+        <Image source={playerIcon.image || {uri: playerIcon}} style={{height: 100, width: 100, borderRadius:50}}></Image>
       </View>
       :
         <View>
