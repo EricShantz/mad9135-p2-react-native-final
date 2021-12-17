@@ -21,20 +21,26 @@ import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as ImagePicker from 'expo-image-picker';
-import * as permissions from 'react-native-permissions';
-import { request, PERMISSIONS } from 'react-native-permissions';
+// import * as permissions from 'react-native-permissions';
+// import { request, PERMISSIONS } from 'react-native-permissions';
 
 let globalPlayers;
 let globalSetPlayers;
+let globalChosenAvatar;
+let globalSetAvatar;
+
 
 export default function HomeScreen({ navigation }) {
   const [image, setImage] = useState(null);
   const { players, setPlayers } = usePlayersContext();
-  globalPlayers = players;
-  globalSetPlayers = setPlayers;
   const [player, setPlayer] = useState({});
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
+  globalChosenAvatar = chosenAvatar
+  globalSetAvatar = setChosenAvatar
+  globalPlayers = players;
+  globalSetPlayers = setPlayers;
+
 
   let avatars = [
     { image: require('../assets/avatars/Bear.png') },
@@ -50,10 +56,6 @@ export default function HomeScreen({ navigation }) {
     { image: require('../assets/avatars/Unicorn.png') },
     { image: require('../assets/avatars/Whale.png') },
   ];
-
-  function addPlayer() {
-    setPlayers([...players, player]);
-  }
 
   const showAlert = () =>
     Alert.alert('Alert', 'Cannot leave input field empty', [
@@ -79,6 +81,7 @@ export default function HomeScreen({ navigation }) {
 
   const takePic = async () => {
     //use the camera and take a picture
+    globalSetAvatar(null)
     let options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
@@ -90,6 +93,7 @@ export default function HomeScreen({ navigation }) {
     if (!result.cancelled) {
       //setImage is our state variable to save the image source
       setImage(result.uri);
+      setShowModal(true)
     }
   };
 
@@ -98,6 +102,7 @@ export default function HomeScreen({ navigation }) {
       edges={['left', 'right']}
       style={(theme.container, theme.backgroundStyling)}
     >
+
       <FlatList
         horizontal={true}
         data={players}
@@ -121,7 +126,7 @@ export default function HomeScreen({ navigation }) {
           )
         }
       ></FlatList>
-
+      
       {/* ===============================POPUP=============================*/}
       <Modal animationType="slide" transparent={false} visible={showModal}>
         <KeyboardAvoidingView
@@ -149,19 +154,36 @@ export default function HomeScreen({ navigation }) {
 
             {chosenAvatar != undefined && (
               <Image source={chosenAvatar.image} style={theme.bigOlIcon} />
-            )}
+              )}
+              
+
+            {image &&
+            <Image source={{uri: image}} style={theme.bigOlIcon}/>
+            }
 
             <View style={theme.playerInput}>
               <TextInput
                 style={theme.inputElement}
                 placeholder="New Player"
-                r
                 onChangeText={(text) => {
+
+                  if(chosenAvatar){
+                    console.log("YOU USED AN ICON")
+                    console.log(chosenAvatar)
                   setPlayer({
                     name: text,
                     id: Math.random() * 1000,
                     avatar: chosenAvatar,
                   });
+                }else {
+                  console.log("YOU USED AN IMAGE")
+
+                  setPlayer({
+                    name: text,
+                    id: Math.random() * 1000,
+                    avatar: image,
+                  });
+                }
                 }}
               />
             </View>
@@ -172,9 +194,9 @@ export default function HomeScreen({ navigation }) {
                   return showAlert();
                 } else {
                   setPlayers([...players, player]);
-                  addPlayer();
                   setShowModal(false);
                   setPlayer({});
+                  setImage(image)
                 }
               }}
             >
@@ -202,9 +224,11 @@ export default function HomeScreen({ navigation }) {
         )}
       </View>
 
-      {/* AVATARS LIST */}
+      {/* =================================AVATARS LIST=============================== */}
       <View style={{ marginTop: 15, marginBottom: 30 }}>
-        <Button title="Gallery" onPress={takePic}></Button>
+        <Pressable  onPress={takePic}>
+          <Text>Gallery</Text>
+        </Pressable>
         <Text
           style={{
             fontFamily: 'Bakbak',
@@ -227,6 +251,7 @@ export default function HomeScreen({ navigation }) {
                   onPress={() => {
                     setChosenAvatar(item);
                     setShowModal(true);
+                    setImage(null)
                   }}
                   key={item + Date.now() + Math.random() * 21}
                   style={theme.avatarContainer}
@@ -249,6 +274,10 @@ export default function HomeScreen({ navigation }) {
 
 function Player({ players, setPlayers }) {
   let id = players.item.id;
+
+  console.log("PLAYERS", players)
+  console.log("GCA",globalChosenAvatar)
+
   return (
     <View style={theme.playerContainer}>
       <Pressable
@@ -259,10 +288,17 @@ function Player({ players, setPlayers }) {
       >
         <Text style={{ textAlign: 'center' }}>X</Text>
       </Pressable>
+      { globalChosenAvatar != null ?
       <Image
         source={players.item.avatar.image}
         style={{ width: 50, height: 50 }}
+        />
+      :
+      <Image
+        source={{uri: players.item.avatar}}
+        style={{ width: 50, height: 50 }}
       />
+    }
       <Text style={theme.playerItem}>{players.item.name}</Text>
     </View>
   );
