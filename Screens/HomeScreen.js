@@ -27,7 +27,8 @@ import * as ImagePicker from 'expo-image-picker';
 let globalPlayers;
 let globalSetPlayers;
 let globalChosenAvatar;
-let globalSetAvatar;
+let globalSetChosenAvatar;
+let globalImage;
 
 
 export default function HomeScreen({ navigation }) {
@@ -37,9 +38,10 @@ export default function HomeScreen({ navigation }) {
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
   globalChosenAvatar = chosenAvatar
-  globalSetAvatar = setChosenAvatar
+  globalSetChosenAvatar = setChosenAvatar
   globalPlayers = players;
   globalSetPlayers = setPlayers;
+  globalImage = image
 
 
   let avatars = [
@@ -81,7 +83,7 @@ export default function HomeScreen({ navigation }) {
 
   const takePic = async () => {
     //use the camera and take a picture
-    globalSetAvatar(null)
+    globalSetChosenAvatar(null)
     let options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
@@ -94,6 +96,7 @@ export default function HomeScreen({ navigation }) {
       //setImage is our state variable to save the image source
       setImage(result.uri);
       setShowModal(true)
+
     }
   };
 
@@ -158,7 +161,7 @@ export default function HomeScreen({ navigation }) {
               
 
             {image &&
-            <Image source={{uri: image}} style={theme.bigOlIcon}/>
+            <Image source={{uri: image}} style={{width: 200, height: 200, borderRadius: 100, alignSelf:'center', marginVertical: 20}}/>
             }
 
             <View style={theme.playerInput}>
@@ -177,7 +180,6 @@ export default function HomeScreen({ navigation }) {
                   });
                 }else {
                   console.log("YOU USED AN IMAGE")
-
                   setPlayer({
                     name: text,
                     id: Math.random() * 1000,
@@ -277,6 +279,7 @@ function Player({ players, setPlayers }) {
 
   console.log("PLAYERS", players)
   console.log("GCA",globalChosenAvatar)
+  console.log("BLOBAL IMAGE", globalImage)
 
   return (
     <View style={theme.playerContainer}>
@@ -288,17 +291,11 @@ function Player({ players, setPlayers }) {
       >
         <Text style={{ textAlign: 'center' }}>X</Text>
       </Pressable>
-      { globalChosenAvatar != null ?
-      <Image
-        source={players.item.avatar.image}
-        style={{ width: 50, height: 50 }}
+        <Image
+        source={players.item.avatar.image || {uri: players.item.avatar}}
+        style={{ width: 50, height: 50, borderRadius: 50 }}
         />
-      :
-      <Image
-        source={{uri: players.item.avatar}}
-        style={{ width: 50, height: 50 }}
-      />
-    }
+
       <Text style={theme.playerItem}>{players.item.name}</Text>
     </View>
   );
