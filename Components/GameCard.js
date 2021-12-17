@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { ScrollView, State } from 'react-native-gesture-handler';
 import { TapGestureHandler } from 'react-native-gesture-handler';
-import theme from '../theme';
 import data from '../data';
 
 const { width, height } = Dimensions.get('window');
@@ -99,7 +98,6 @@ function Card({ games, index }) {
             }}
           >
             <ImageBackground
-              // resizeMode={'fit'} // or cover
               style={{
                 flex: 1,
                 justifyContent: 'center',

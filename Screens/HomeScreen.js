@@ -19,16 +19,14 @@ import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
-import { createStackNavigator } from '@react-navigation/stack';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
-// import * as permissions from 'react-native-permissions';
-// import { request, PERMISSIONS } from 'react-native-permissions';
 
 let globalPlayers;
 let globalSetPlayers;
 let globalChosenAvatar;
-let globalSetAvatar;
+let globalSetChosenAvatar;
+let globalImage;
 
 export default function HomeScreen({ navigation }) {
   const [image, setImage] = useState(null);
@@ -36,10 +34,12 @@ export default function HomeScreen({ navigation }) {
   const [player, setPlayer] = useState({});
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
+
   globalChosenAvatar = chosenAvatar;
   globalSetAvatar = setChosenAvatar;
   globalPlayers = players;
   globalSetPlayers = setPlayers;
+  globalImage = image;
 
   let avatars = [
     { image: require('../assets/avatars/Bear.png') },
@@ -65,8 +65,6 @@ export default function HomeScreen({ navigation }) {
     ]);
 
   useEffect(() => {
-    //on load of this screen / component
-    //for Android and iOS not web
     (async () => {
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync().catch(
@@ -79,8 +77,7 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const takePic = async () => {
-    //use the camera and take a picture
-    globalSetAvatar(null);
+    globalSetChosenAvatar(null);
     let options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
@@ -90,7 +87,6 @@ export default function HomeScreen({ navigation }) {
       console.error
     );
     if (!result.cancelled) {
-      //setImage is our state variable to save the image source
       setImage(result.uri);
       setShowModal(true);
     }
@@ -160,7 +156,16 @@ export default function HomeScreen({ navigation }) {
               )}
 
               {image && (
-                <Image source={{ uri: image }} style={theme.bigOlIcon} />
+                <Image
+                  source={{ uri: image }}
+                  style={{
+                    width: 200,
+                    height: 200,
+                    borderRadius: 100,
+                    alignSelf: 'center',
+                    marginVertical: 20,
+                  }}
+                />
               )}
 
               <View style={theme.playerInput}>
@@ -178,7 +183,6 @@ export default function HomeScreen({ navigation }) {
                       });
                     } else {
                       console.log('YOU USED AN IMAGE');
-
                       setPlayer({
                         name: text,
                         id: Math.random() * 1000,
@@ -280,9 +284,6 @@ export default function HomeScreen({ navigation }) {
 function Player({ players, setPlayers }) {
   let id = players.item.id;
 
-  console.log('PLAYERS', players);
-  console.log('GCA', globalChosenAvatar);
-
   return (
     <View style={theme.playerContainer}>
       <Pressable
@@ -293,17 +294,12 @@ function Player({ players, setPlayers }) {
       >
         <Text style={{ textAlign: 'center' }}>X</Text>
       </Pressable>
-      {globalChosenAvatar != null ? (
-        <Image
-          source={players.item.avatar.image}
-          style={{ width: 50, height: 50 }}
-        />
-      ) : (
-        <Image
-          source={{ uri: players.item.avatar }}
-          style={{ width: 50, height: 50 }}
-        />
-      )}
+
+      <Image
+        source={players.item.avatar.image || { uri: players.item.avatar }}
+        style={{ width: 50, height: 50, borderRadius: 50 }}
+      />
+
       <Text style={theme.playerItem}>{players.item.name}</Text>
     </View>
   );

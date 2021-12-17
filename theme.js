@@ -272,7 +272,7 @@ const theme = StyleSheet.create({
     fontFamily: 'Bakbak',
     textAlign: 'center',
     fontSize: 30,
-    marginTop: 80,
+    marginTop: 50,
   },
 
   imageCircle: {
