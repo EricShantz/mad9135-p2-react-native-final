@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
 
   backgroundStyling: {
-    backgroundColor: '#30d5c8',
+    backgroundColor: '#3C006F',
     height: Dimensions.get('screen').height,
   },
 
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     marginTop: Dimensions.get('screen').height / 3,
     textAlign: 'center',
     fontSize: 24,
+    color: 'white',
     fontFamily: 'Bakbak',
   },
   goobie: {

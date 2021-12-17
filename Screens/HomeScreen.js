@@ -21,6 +21,7 @@ import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from '@expo/vector-icons';
 // import * as permissions from 'react-native-permissions';
 // import { request, PERMISSIONS } from 'react-native-permissions';
 
@@ -29,18 +30,16 @@ let globalSetPlayers;
 let globalChosenAvatar;
 let globalSetAvatar;
 
-
 export default function HomeScreen({ navigation }) {
   const [image, setImage] = useState(null);
   const { players, setPlayers } = usePlayersContext();
   const [player, setPlayer] = useState({});
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
-  globalChosenAvatar = chosenAvatar
-  globalSetAvatar = setChosenAvatar
+  globalChosenAvatar = chosenAvatar;
+  globalSetAvatar = setChosenAvatar;
   globalPlayers = players;
   globalSetPlayers = setPlayers;
-
 
   let avatars = [
     { image: require('../assets/avatars/Bear.png') },
@@ -81,7 +80,7 @@ export default function HomeScreen({ navigation }) {
 
   const takePic = async () => {
     //use the camera and take a picture
-    globalSetAvatar(null)
+    globalSetAvatar(null);
     let options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
@@ -93,7 +92,7 @@ export default function HomeScreen({ navigation }) {
     if (!result.cancelled) {
       //setImage is our state variable to save the image source
       setImage(result.uri);
-      setShowModal(true)
+      setShowModal(true);
     }
   };
 
@@ -102,148 +101,153 @@ export default function HomeScreen({ navigation }) {
       edges={['left', 'right']}
       style={(theme.container, theme.backgroundStyling)}
     >
+      <ScrollView>
+        <FlatList
+          horizontal={true}
+          data={players}
+          renderItem={(item) => (
+            <Player players={item} setPlayers={setPlayers} />
+          )}
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          style={theme.playersListContainer}
+          ListHeaderComponent={
+            players.length === 0 && (
+              <Text
+                style={{
+                  color: '#008D8D',
+                  fontFamily: 'Bakbak',
+                }}
+              >
+                Please choose at least two players.
+              </Text>
+            )
+          }
+        ></FlatList>
 
-      <FlatList
-        horizontal={true}
-        data={players}
-        renderItem={(item) => <Player players={item} setPlayers={setPlayers} />}
-        contentContainerStyle={{
-          flexGrow: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        style={theme.playersListContainer}
-        ListHeaderComponent={
-          players.length === 0 && (
-            <Text
-              style={{
-                color: '#008D8D',
-                fontFamily: 'Bakbak',
+        {/* ===============================POPUP=============================*/}
+        <Modal animationType="slide" transparent={false} visible={showModal}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={theme.keyboardContainer}
+            style={theme.modal}
+          >
+            <Pressable
+              style={{ height: Dimensions.get('screen').height }}
+              onPress={() => {
+                Keyboard.dismiss();
               }}
             >
-              Please choose at least two players.
-            </Text>
-          )
-        }
-      ></FlatList>
-      
-      {/* ===============================POPUP=============================*/}
-      <Modal animationType="slide" transparent={false} visible={showModal}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={theme.keyboardContainer}
-          style={theme.modal}
-        >
-          <Pressable
-            style={{ height: Dimensions.get('screen').height }}
-            onPress={() => {
-              Keyboard.dismiss();
-            }}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={theme.title}>Enter Player Name</Text>
               <Pressable
-                style={theme.cancelButton}
+                style={
+                  (theme.cancelButton,
+                  { alignSelf: 'flex-end', marginTop: 30, marginRight: 20 })
+                }
                 onPress={() => {
                   setShowModal(false);
                 }}
               >
                 <Text style={theme.cancelButtonText}>Cancel</Text>
               </Pressable>
-            </View>
 
-            {chosenAvatar != undefined && (
-              <Image source={chosenAvatar.image} style={theme.bigOlIcon} />
+              <Text style={theme.title}>Enter Player Name</Text>
+
+              {chosenAvatar != undefined && (
+                <Image source={chosenAvatar.image} style={theme.bigOlIcon} />
               )}
-              
 
-            {image &&
-            <Image source={{uri: image}} style={theme.bigOlIcon}/>
-            }
+              {image && (
+                <Image source={{ uri: image }} style={theme.bigOlIcon} />
+              )}
 
-            <View style={theme.playerInput}>
-              <TextInput
-                style={theme.inputElement}
-                placeholder="New Player"
-                onChangeText={(text) => {
+              <View style={theme.playerInput}>
+                <TextInput
+                  style={theme.inputElement}
+                  placeholder="New Player"
+                  onChangeText={(text) => {
+                    if (chosenAvatar) {
+                      console.log('YOU USED AN ICON');
+                      console.log(chosenAvatar);
+                      setPlayer({
+                        name: text,
+                        id: Math.random() * 1000,
+                        avatar: chosenAvatar,
+                      });
+                    } else {
+                      console.log('YOU USED AN IMAGE');
 
-                  if(chosenAvatar){
-                    console.log("YOU USED AN ICON")
-                    console.log(chosenAvatar)
-                  setPlayer({
-                    name: text,
-                    id: Math.random() * 1000,
-                    avatar: chosenAvatar,
-                  });
-                }else {
-                  console.log("YOU USED AN IMAGE")
+                      setPlayer({
+                        name: text,
+                        id: Math.random() * 1000,
+                        avatar: image,
+                      });
+                    }
+                  }}
+                />
+              </View>
 
-                  setPlayer({
-                    name: text,
-                    id: Math.random() * 1000,
-                    avatar: image,
-                  });
-                }
+              <Pressable
+                style={theme.button}
+                onPress={() => {
+                  if (player.name == undefined) {
+                    return showAlert();
+                  } else {
+                    setPlayers([...players, player]);
+                    setShowModal(false);
+                    setPlayer({});
+                    setImage(image);
+                  }
                 }}
-              />
-            </View>
+              >
+                <Text style={theme.addBtnText}>Add Player</Text>
+              </Pressable>
+            </Pressable>
+          </KeyboardAvoidingView>
+        </Modal>
+        {/* ==============================POPUP END============================= */}
+
+        <View style={theme.container}>
+          {players.length >= 2 ? (
             <Pressable
               style={theme.button}
               onPress={() => {
-                if (player.name == undefined) {
-                  return showAlert();
-                } else {
-                  setPlayers([...players, player]);
-                  setShowModal(false);
-                  setPlayer({});
-                  setImage(image)
-                }
+                navigation.navigate('Games');
               }}
             >
-              <Text style={theme.addBtnText}>Add Player</Text>
+              <Text style={theme.text}>{'Start Playing!'}</Text>
             </Pressable>
-          </Pressable>
-        </KeyboardAvoidingView>
-      </Modal>
-      {/* ==============================POPUP END============================= */}
+          ) : (
+            <Pressable style={theme.disabledButton}>
+              <Text style={theme.disabledText}>{'Start Playing!'}</Text>
+            </Pressable>
+          )}
+        </View>
 
-      <View style={theme.container}>
-        {players.length >= 2 ? (
-          <Pressable
-            style={theme.button}
-            onPress={() => {
-              navigation.navigate('Games');
-            }}
-          >
-            <Text style={theme.text}>{'Start Playing!'}</Text>
-          </Pressable>
-        ) : (
-          <Pressable style={theme.disabledButton}>
-            <Text style={theme.disabledText}>{'Start Playing!'}</Text>
-          </Pressable>
-        )}
-      </View>
+        {/* =================================AVATARS LIST=============================== */}
+        <View style={{ marginTop: 15, marginBottom: 30 }}>
+          <View style={theme.rowContainer}>
+            <Text
+              style={{
+                fontFamily: 'Bakbak',
+                textAlign: 'center',
+                color: 'white',
+                fontSize: 20,
+              }}
+            >
+              Choose your players!
+            </Text>
+            <Pressable onPress={takePic} style={theme.smallButton}>
+              <Ionicons name={'camera'} color={'#fff'} size={30} />
+            </Pressable>
+          </View>
 
-      {/* =================================AVATARS LIST=============================== */}
-      <View style={{ marginTop: 15, marginBottom: 30 }}>
-        <Pressable  onPress={takePic}>
-          <Text>Gallery</Text>
-        </Pressable>
-        <Text
-          style={{
-            fontFamily: 'Bakbak',
-            textAlign: 'center',
-            color: 'white',
-            fontSize: 20,
-          }}
-        >
-          Choose your players!
-        </Text>
-
-        <ScrollView
+          {/* <ScrollView
           style={theme.avatarList}
-          contentContainerStyle={{ flex: 1 }}
-        >
+          contentContainerStyle={{ flex: 1, paddingBottom: 50 }}
+        > */}
           <View style={theme.avatarList}>
             {avatars.map((item) => {
               return (
@@ -251,7 +255,7 @@ export default function HomeScreen({ navigation }) {
                   onPress={() => {
                     setChosenAvatar(item);
                     setShowModal(true);
-                    setImage(null)
+                    setImage(null);
                   }}
                   key={item + Date.now() + Math.random() * 21}
                   style={theme.avatarContainer}
@@ -264,10 +268,11 @@ export default function HomeScreen({ navigation }) {
               );
             })}
           </View>
-        </ScrollView>
-      </View>
+          {/* </ScrollView> */}
+        </View>
 
-      <StatusBar style="auto" />
+        <StatusBar style="auto" />
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -275,8 +280,8 @@ export default function HomeScreen({ navigation }) {
 function Player({ players, setPlayers }) {
   let id = players.item.id;
 
-  console.log("PLAYERS", players)
-  console.log("GCA",globalChosenAvatar)
+  console.log('PLAYERS', players);
+  console.log('GCA', globalChosenAvatar);
 
   return (
     <View style={theme.playerContainer}>
@@ -288,17 +293,17 @@ function Player({ players, setPlayers }) {
       >
         <Text style={{ textAlign: 'center' }}>X</Text>
       </Pressable>
-      { globalChosenAvatar != null ?
-      <Image
-        source={players.item.avatar.image}
-        style={{ width: 50, height: 50 }}
+      {globalChosenAvatar != null ? (
+        <Image
+          source={players.item.avatar.image}
+          style={{ width: 50, height: 50 }}
         />
-      :
-      <Image
-        source={{uri: players.item.avatar}}
-        style={{ width: 50, height: 50 }}
-      />
-    }
+      ) : (
+        <Image
+          source={{ uri: players.item.avatar }}
+          style={{ width: 50, height: 50 }}
+        />
+      )}
       <Text style={theme.playerItem}>{players.item.name}</Text>
     </View>
   );

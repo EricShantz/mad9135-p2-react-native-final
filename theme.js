@@ -8,6 +8,10 @@ const theme = StyleSheet.create({
     // blue
     backgroundColor: '#30d5c8',
   },
+  //purple
+  splashBackground: {
+    backgroundColor: '#3C006F',
+  },
   backgroundStylingGameScreen: {
     // Orange
     backgroundColor: '#FF9E3F',
@@ -40,7 +44,6 @@ const theme = StyleSheet.create({
     flexWrap: 'wrap',
     alignSelf: 'center',
     // ==============================Here's the thing thats hiding the top flatlist on the home page
-    // marginBottom:500
   },
   addBtnText: {
     fontFamily: 'Bakbak',
@@ -51,7 +54,8 @@ const theme = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: 20,
+    textAlign: 'center',
   },
   listTitle: {
     alignSelf: 'flex-start',
@@ -249,7 +253,7 @@ const theme = StyleSheet.create({
   },
   nextGameBtnShuffle: {
     alignSelf: 'center',
-    marginLeft: Dimensions.get('screen').width/3.5,
+    marginLeft: Dimensions.get('screen').width / 3.5,
     marginBottom: 500,
     backgroundColor: 'white',
     width: 500,
@@ -268,7 +272,7 @@ const theme = StyleSheet.create({
     fontFamily: 'Bakbak',
     textAlign: 'center',
     fontSize: 30,
-    marginTop: 70,
+    marginTop: 80,
   },
 
   imageCircle: {
@@ -281,6 +285,22 @@ const theme = StyleSheet.create({
 
   bodyText: {
     fontSize: 14,
+  },
+
+  rowContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  smallButton: {
+    alignItems: 'center',
+    backgroundColor: '#FF9E3F',
+    borderRadius: 10,
+    flexWrap: 'wrap',
+    padding: 8,
+    marginLeft: 15,
+    alignSelf: 'baseline',
   },
 });
 

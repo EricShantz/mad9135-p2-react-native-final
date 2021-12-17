@@ -135,7 +135,7 @@ function Card({ games, index }) {
             }}
           >
             <ScrollView
-              contentContainerStyle={{ paddingTop: 25, paddingBottom: 25 }}
+              contentContainerStyle={{ paddingTop: 5, paddingBottom: 25 }}
             >
               <Text
                 style={{
