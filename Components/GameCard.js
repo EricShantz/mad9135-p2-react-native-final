@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import {
-  StyleSheet,
   Animated,
   Text,
   View,
@@ -33,11 +32,11 @@ export default function GameCard({ games }) {
       }}
     >
       <Animated.FlatList
-        style={{ paddingLeft: 50, paddingRight: 50}}
+        style={{ paddingLeft: 50, paddingRight: 50 }}
         contentContainerStyle={{ justifyContent: 'center' }}
         horizontal={true}
         data={data}
-        showsHorizontalScrollIndicator= {false}
+        showsHorizontalScrollIndicator={false}
         snapToInterval={ITEM_SIZE}
         decelerationRate={0}
         onScroll={Animated.event(
@@ -115,7 +114,7 @@ function Card({ games, index }) {
                   backgroundColor: '#E30A5C',
                   padding: 5,
                   fontFamily: 'Bakbak',
-                  color:'white'
+                  color: 'white',
                 }}
                 numberOfLines={3}
               >
@@ -138,13 +137,17 @@ function Card({ games, index }) {
             <ScrollView
               contentContainerStyle={{ paddingTop: 25, paddingBottom: 25 }}
             >
-              <Text style={{fontSize: 22,
+              <Text
+                style={{
+                  fontSize: 22,
                   textAlign: 'center',
                   padding: 5,
                   fontFamily: 'Bakbak',
-                  color:'black'}}>
-                    {games.name}
-                  </Text>
+                  color: 'black',
+                }}
+              >
+                {games.name}
+              </Text>
               <Text style={{ fontSize: 16 }}>{games.description}</Text>
             </ScrollView>
           </Animated.View>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   Alert,
@@ -20,11 +20,15 @@ import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as ImagePicker from 'expo-image-picker';
+import * as permissions from 'react-native-permissions';
+import { request, PERMISSIONS } from 'react-native-permissions';
 
 let globalPlayers;
 let globalSetPlayers;
 
 export default function HomeScreen({ navigation }) {
+  const [image, setImage] = useState(null);
   const { players, setPlayers } = usePlayersContext();
   globalPlayers = players;
   globalSetPlayers = setPlayers;
@@ -58,6 +62,36 @@ export default function HomeScreen({ navigation }) {
         style: 'ok',
       },
     ]);
+
+  useEffect(() => {
+    //on load of this screen / component
+    //for Android and iOS not web
+    (async () => {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync().catch(
+          console.error
+        );
+      if (status !== 'granted') {
+        alert("Fine. Then you can't use my app.");
+      }
+    })();
+  }, []);
+
+  const takePic = async () => {
+    //use the camera and take a picture
+    let options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      aspect: [4, 3],
+      quality: 1,
+    };
+    let result = await ImagePicker.launchCameraAsync(options).catch(
+      console.error
+    );
+    if (!result.cancelled) {
+      //setImage is our state variable to save the image source
+      setImage(result.uri);
+    }
+  };
 
   return (
     <SafeAreaView
@@ -168,7 +202,9 @@ export default function HomeScreen({ navigation }) {
         )}
       </View>
 
+      {/* AVATARS LIST */}
       <View style={{ marginTop: 15, marginBottom: 30 }}>
+        <Button title="Gallery" onPress={takePic}></Button>
         <Text
           style={{
             fontFamily: 'Bakbak',
@@ -179,8 +215,6 @@ export default function HomeScreen({ navigation }) {
         >
           Choose your players!
         </Text>
-
-        {/* AVATARS LIST */}
 
         <ScrollView
           style={theme.avatarList}
