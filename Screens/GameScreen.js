@@ -1,15 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {
-  StyleSheet,
-  Animated,
-  Text,
-  Button,
-  View,
-  Platform,
-  SafeAreaView,
-  Pressable,
-  Dimensions,
-} from 'react-native';
+import { Text, View, SafeAreaView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import ShuffleScreen from '../Components/Shuffle';

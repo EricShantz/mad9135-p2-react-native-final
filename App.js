@@ -1,4 +1,17 @@
-import React, { useEffect, useState } from 'react';
+/** By Johanna Cano and Eric Shantz
+ *
+ * React Native core components:
+ * Instead of a Button component, we used Pressable for customized styling
+ *
+ * React Native APIs used:
+ * Alert, Animated, Platform, Stylesheet, Keyboard
+ *
+ * Expo Components/APIs used:
+ * Camera, Font, GestureHandler, Audio
+ *
+ */
+
+import React, { useState } from 'react';
 import { Image } from 'react-native-elements';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -6,7 +19,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import GameScreen from './Screens/GameScreen';
 import HomeScreen from './Screens/HomeScreen';
-import { usePlayersContext, PlayersProvider } from './Context/AppContext';
+import { PlayersProvider } from './Context/AppContext';
 import { useFonts } from 'expo-font';
 import { theme } from './theme';
 
@@ -29,7 +42,7 @@ export default function App() {
   return (
     <PlayersProvider>
       {showSplashScreen ? (
-        <View style={(styles.container, styles.backgroundStyling)}>
+        <View style={(theme.container, styles.backgroundStyling)}>
           <Text style={styles.splashScreenText}> Welcome to</Text>
           <Image
             source={require('./assets/avatars/GoobieIcon2.png')}
@@ -111,13 +124,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-
   backgroundStyling: {
     backgroundColor: '#3C006F',
     height: Dimensions.get('screen').height,

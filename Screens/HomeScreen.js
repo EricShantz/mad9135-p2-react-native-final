@@ -13,7 +13,6 @@ import {
   Pressable,
   ActivityIndicator,
   KeyboardAvoidingView,
-  
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
@@ -22,7 +21,6 @@ import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
-
 
 let globalPlayers;
 let globalSetPlayers;
@@ -37,14 +35,14 @@ export default function HomeScreen({ navigation }) {
   const [player, setPlayer] = useState({});
   const [chosenAvatar, setChosenAvatar] = useState();
   const [showModal, setShowModal] = useState(false);
-  const [showActivityIndicator, setShowActivityIndicator] = useState(false)
+  const [showActivityIndicator, setShowActivityIndicator] = useState(false);
 
   globalChosenAvatar = chosenAvatar;
   globalSetChosenAvatar = setChosenAvatar;
   globalPlayers = players;
   globalSetPlayers = setPlayers;
   globalImage = image;
-  globalSetShowActivityIndicator = setShowActivityIndicator
+  globalSetShowActivityIndicator = setShowActivityIndicator;
 
   let avatars = [
     { image: require('../assets/avatars/Bear.png') },
@@ -94,8 +92,7 @@ export default function HomeScreen({ navigation }) {
     if (!result.cancelled) {
       setImage(result.uri);
       setShowModal(true);
-      setShowActivityIndicator(true)
-
+      setShowActivityIndicator(true);
     }
   };
 
@@ -104,8 +101,14 @@ export default function HomeScreen({ navigation }) {
       edges={['left', 'right']}
       style={(theme.container, theme.backgroundStyling)}
     >
-      <ActivityIndicator size='large' color='#E30A5C' animating={showActivityIndicator}/>
+      <ActivityIndicator
+        size="large"
+        color="#E30A5C"
+        animating={showActivityIndicator}
+      />
+
       <ScrollView>
+        {/* ===============================CHOSEN PLAYERS LIST=============================*/}
         <FlatList
           horizontal={true}
           data={players}
@@ -152,8 +155,7 @@ export default function HomeScreen({ navigation }) {
                 }
                 onPress={() => {
                   setShowModal(false);
-                  setShowActivityIndicator(false)
-
+                  setShowActivityIndicator(false);
                 }}
               >
                 <Text style={theme.cancelButtonText}>Cancel</Text>
@@ -166,10 +168,7 @@ export default function HomeScreen({ navigation }) {
               )}
 
               {image && (
-                <Image
-                  source={{ uri: image }}
-                  style={theme.bigOlIcon}
-                />
+                <Image source={{ uri: image }} style={theme.bigOlIcon} />
               )}
 
               <View style={theme.playerInput}>
@@ -204,8 +203,8 @@ export default function HomeScreen({ navigation }) {
                     setShowModal(false);
                     setPlayer({});
                     setImage(image);
-                    setShowActivityIndicator(false)
-                    }
+                    setShowActivityIndicator(false);
+                  }
                 }}
               >
                 <Text style={theme.addBtnText}>Add Player</Text>
@@ -250,10 +249,6 @@ export default function HomeScreen({ navigation }) {
             </Pressable>
           </View>
 
-          {/* <ScrollView
-          style={theme.avatarList}
-          contentContainerStyle={{ flex: 1, paddingBottom: 50 }}
-        > */}
           <View style={theme.avatarList}>
             {avatars.map((item) => {
               return (
@@ -262,7 +257,7 @@ export default function HomeScreen({ navigation }) {
                     setChosenAvatar(item);
                     setShowModal(true);
                     setImage(null);
-                    setShowActivityIndicator(true)
+                    setShowActivityIndicator(true);
                   }}
                   key={item + Date.now() + Math.random() * 21}
                   style={theme.avatarContainer}
@@ -275,7 +270,6 @@ export default function HomeScreen({ navigation }) {
               );
             })}
           </View>
-          {/* </ScrollView> */}
         </View>
 
         <StatusBar style="auto" />
