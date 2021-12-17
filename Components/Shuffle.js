@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  Image,
-  ActivityIndicator,
-  ImageBackground,
-  View,
-  Button,
-  Dimensions,
-  Pressable,
-} from 'react-native';
-import { StyleSheet } from 'react-native';
+import { Text, Image, View, Pressable } from 'react-native';
 import { useState, useEffect } from 'react';
 import { usePlayersContext } from '../Context/AppContext';
 import { Audio } from 'expo-av';
@@ -81,8 +71,16 @@ export default function ShuffleScreen() {
         >
           <Text style={theme.textAlign}>{player}</Text>
           {playerIcon ? (
-            <View >
-              <Image source={playerIcon.image || {uri: playerIcon}} style={{height: 100, width: 100, borderRadius:50, alignSelf:'center'}}></Image>
+            <View>
+              <Image
+                source={playerIcon.image || { uri: playerIcon }}
+                style={{
+                  height: 100,
+                  width: 100,
+                  borderRadius: 50,
+                  alignSelf: 'center',
+                }}
+              ></Image>
             </View>
           ) : (
             <View>
