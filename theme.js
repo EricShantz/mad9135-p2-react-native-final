@@ -81,10 +81,11 @@ const theme = StyleSheet.create({
     textAlignVertical: 'bottom',
   },
   bigOlIcon: {
-    marginTop: 50,
-    width: 175,
-    height: 175,
+    width: 150,
+    height: 150,
+    borderRadius: 100,
     alignSelf: 'center',
+    marginVertical: 20,
   },
   playerContainer: {
     display: 'flex',

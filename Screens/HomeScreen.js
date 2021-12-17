@@ -36,7 +36,7 @@ export default function HomeScreen({ navigation }) {
   const [showModal, setShowModal] = useState(false);
 
   globalChosenAvatar = chosenAvatar;
-  globalSetAvatar = setChosenAvatar;
+  globalSetChosenAvatar = setChosenAvatar;
   globalPlayers = players;
   globalSetPlayers = setPlayers;
   globalImage = image;
@@ -158,13 +158,7 @@ export default function HomeScreen({ navigation }) {
               {image && (
                 <Image
                   source={{ uri: image }}
-                  style={{
-                    width: 200,
-                    height: 200,
-                    borderRadius: 100,
-                    alignSelf: 'center',
-                    marginVertical: 20,
-                  }}
+                  style={theme.bigOlIcon}
                 />
               )}
 
@@ -174,15 +168,12 @@ export default function HomeScreen({ navigation }) {
                   placeholder="New Player"
                   onChangeText={(text) => {
                     if (chosenAvatar) {
-                      console.log('YOU USED AN ICON');
-                      console.log(chosenAvatar);
                       setPlayer({
                         name: text,
                         id: Math.random() * 1000,
                         avatar: chosenAvatar,
                       });
                     } else {
-                      console.log('YOU USED AN IMAGE');
                       setPlayer({
                         name: text,
                         id: Math.random() * 1000,

@@ -81,11 +81,8 @@ export default function ShuffleScreen() {
         >
           <Text style={theme.textAlign}>{player}</Text>
           {playerIcon ? (
-            <View style={theme.imageCircle}>
-              <Image
-                source={playerIcon.image}
-                style={theme.playerSpinnerImage}
-              ></Image>
+            <View >
+              <Image source={playerIcon.image || {uri: playerIcon}} style={{height: 100, width: 100, borderRadius:50, alignSelf:'center'}}></Image>
             </View>
           ) : (
             <View>
