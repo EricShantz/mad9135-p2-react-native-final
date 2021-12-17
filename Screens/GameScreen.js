@@ -14,21 +14,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import ShuffleScreen from '../Components/Shuffle';
 import { theme } from '../theme';
-import { usePlayersContext } from '../Context/AppContext';
-import {
-  FlatList,
-  State,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
-import { TapGestureHandler } from 'react-native-gesture-handler';
-// import GestureFlipView from 'react-native-gesture-flip-card';
-import CardFlip from 'react-native-card-flip';
 import GameCard from '../Components/GameCard';
 
 export default function GameScreen() {
-  const { players, setPlayers } = usePlayersContext();
   const [showSpin, setShowSpin] = useState(true);
-  // console.log(players);
 
   return (
     <View style={theme.backgroundStylingGameScreen}>

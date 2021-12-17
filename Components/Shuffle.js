@@ -15,30 +15,24 @@ export default function ShuffleScreen() {
   const [sound, setSound] = useState()
 
 async function playSound(){
-  console.log("loading Sound")
   const {sound} = await Audio.Sound.createAsync(
     require('../assets/lotto.mp3')
   )
   setSound(sound)
-
-  console.log("playing sound")
   await sound.playAsync()
 }
 
 useEffect(() => {
   return sound
     ? () => {
-        console.log('Unloading Sound');
         sound.unloadAsync(); }
     : undefined;
 }, [sound]);
 
 let shufflePlayers =()=>{
-  console.log("shuffling")
   let  playerSpin = setInterval(function(){
     let passes = Math.floor(Math.random() * players.length);
     players.map((item, index)=>{
-      console.log("PLAYERS", players)
       if(passes == index){
         setPlayer(item.name)
         setPlayerIcon(item.avatar)

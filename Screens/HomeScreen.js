@@ -19,17 +19,13 @@ import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import { TextInput, Modal, Button } from 'react-native';
 import { theme } from '../theme';
 import { usePlayersContext } from '../Context/AppContext';
-import { createStackNavigator } from '@react-navigation/stack';
 import * as ImagePicker from 'expo-image-picker';
-// import * as permissions from 'react-native-permissions';
-// import { request, PERMISSIONS } from 'react-native-permissions';
 
 let globalPlayers;
 let globalSetPlayers;
 let globalChosenAvatar;
 let globalSetChosenAvatar;
 let globalImage;
-
 
 export default function HomeScreen({ navigation }) {
   const [image, setImage] = useState(null);
@@ -68,8 +64,7 @@ export default function HomeScreen({ navigation }) {
     ]);
 
   useEffect(() => {
-    //on load of this screen / component
-    //for Android and iOS not web
+
     (async () => {
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync().catch(
@@ -82,7 +77,6 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const takePic = async () => {
-    //use the camera and take a picture
     globalSetChosenAvatar(null)
     let options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -93,7 +87,6 @@ export default function HomeScreen({ navigation }) {
       console.error
     );
     if (!result.cancelled) {
-      //setImage is our state variable to save the image source
       setImage(result.uri);
       setShowModal(true)
 
@@ -159,7 +152,6 @@ export default function HomeScreen({ navigation }) {
               <Image source={chosenAvatar.image} style={theme.bigOlIcon} />
               )}
               
-
             {image &&
             <Image source={{uri: image}} style={{width: 200, height: 200, borderRadius: 100, alignSelf:'center', marginVertical: 20}}/>
             }
@@ -171,7 +163,6 @@ export default function HomeScreen({ navigation }) {
                 onChangeText={(text) => {
 
                   if(chosenAvatar){
-                    console.log("YOU USED AN ICON")
                     console.log(chosenAvatar)
                   setPlayer({
                     name: text,
@@ -179,7 +170,6 @@ export default function HomeScreen({ navigation }) {
                     avatar: chosenAvatar,
                   });
                 }else {
-                  console.log("YOU USED AN IMAGE")
                   setPlayer({
                     name: text,
                     id: Math.random() * 1000,
@@ -276,10 +266,6 @@ export default function HomeScreen({ navigation }) {
 
 function Player({ players, setPlayers }) {
   let id = players.item.id;
-
-  console.log("PLAYERS", players)
-  console.log("GCA",globalChosenAvatar)
-  console.log("BLOBAL IMAGE", globalImage)
 
   return (
     <View style={theme.playerContainer}>
