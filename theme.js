@@ -1,5 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
+// RASPBERRY #E30A5C
+
 const theme = StyleSheet.create({
   font: {
     fontFamily: 'Bakbak',
