@@ -45,7 +45,6 @@ const theme = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignSelf: 'center',
-    // ==============================Here's the thing thats hiding the top flatlist on the home page
   },
   addBtnText: {
     fontFamily: 'Bakbak',
