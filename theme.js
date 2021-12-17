@@ -1,6 +1,10 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-// RASPBERRY #E30A5C
+// APP COLOURS
+// raspberry: #E30A5C
+// turquoise: #30d5c8
+// purple: #3C006F
+// orange: #FF9E3F
 
 const theme = StyleSheet.create({
   font: {
